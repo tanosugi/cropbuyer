@@ -235,6 +235,7 @@ export default function Create() {
             {pictures &&
               pictures.map((picture) => (
                 <InfoWindow
+                  key={picture.name}
                   position={{ lat: picture.lat, lng: picture.lng }}
                   options={{ maxWidth: 250 }}
                 >
