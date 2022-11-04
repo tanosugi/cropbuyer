@@ -62,23 +62,38 @@ export default function Create() {
   };
   const loadLatLngFromPicture = async () => {
     const pictureNames = ["./rf1.jpg", "./rf2.jpg", "./rf3.jpg"];
-    pictureNames.forEach(async (pictureName: string) => {
+    // pictureNames.map((pictureName: string) => {
+    //   EXIF.getData(pictureName, () => {
+    //     const ret = EXIF.getAllTags(this);
+    //     console.log("ret:", ret);
+    //   });
+    // });
+    await pictureNames.forEach(async (pictureName: string) => {
       let { latitude: lat, longitude: lng } = await exifr.gps(pictureName);
-      console.log("lat,lng:", lat, lng);
-      await setPictures([
-        ...pictures,
-        { name: pictureName, lat: lat, lng: lng },
-      ]);
-      await console.log("pictures:", pictures);
+      let { CreateDate } = await exifr.parse(pictureName, {
+        pick: ["CreateDate"],
+      });
+      console.log(
+        "CreateDate:",
+        CreateDate.getFullYear(),
+        CreateDate.toLocaleDateString()
+      );
+
+      // await console.log("lat,lng:", lat, lng);
+      await setPictures((prevPicture) => {
+        console.log("prevPicture:", prevPicture);
+        return [...prevPicture, { name: pictureName, lat: lat, lng: lng }];
+      });
+      // await console.log("pictures:", pictures);
     });
-    await console.log("pictures all:", pictures);
+    // await console.log("pictures all:", pictures);
   };
   useEffect(() => {
     // get the users current location on intial login
     loadLatLngFromPicture();
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
-        console.log("{ latitude, longitude }:", { latitude, longitude });
+        // console.log("{ latitude, longitude }:", { latitude, longitude });
         setCoordinates({ lat: latitude, lng: longitude });
       }
     );
@@ -217,14 +232,20 @@ export default function Create() {
                 },
               }}
             />
-            {pictures && (
-              <InfoWindow
-                position={{ lat: pictures[0].lat, lng: pictures[0].lng }}
-                options={{ maxWidth: 250 }}
-              >
-                <Image src={pictures[0].name} alt={undefined} width="100px" />
-              </InfoWindow>
-            )}
+            {pictures &&
+              pictures.map((picture) => (
+                <InfoWindow
+                  position={{ lat: picture.lat, lng: picture.lng }}
+                  options={{ maxWidth: 250 }}
+                >
+                  <Image
+                    src={picture.name}
+                    alt={undefined}
+                    maxWidth="100px"
+                    maxHeight="100px"
+                  />
+                </InfoWindow>
+              ))}
           </GoogleMap>
         </View>
       </Grid>
