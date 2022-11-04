@@ -8,10 +8,10 @@ import {
   Polygon,
   useLoadScript,
 } from "@react-google-maps/api";
+
 import exifr from "exifr";
 import { useEffect, useState } from "react";
 
-const libraries = ["places", "drawing", "marker"];
 const id = ["6e120bcd575d29f7"];
 
 const containerStyle = {
@@ -51,9 +51,8 @@ export default function Create() {
     setAutocomplete(autoC);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: String(process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY),
-    libraries: libraries,
+    libraries: ["places", "drawing"],
     mapIds: id,
-    v: "beta",
   });
   const onPlaceChanged = () => {
     // console.log("autocomplete:", autocomplete);
@@ -62,10 +61,17 @@ export default function Create() {
     setCoordinates({ lat, lng });
   };
   const loadLatLngFromPicture = async () => {
-    let { latitude: lat, longitude: lng } = await exifr.gps("./rf1.jpg");
-    console.log("lat,lng:", lat, lng);
-    await setPictures([{ name: "./rf1.jpg", lat: lat, lng: lng }]);
-    await console.log("pictures:", pictures);
+    const pictureNames = ["./rf1.jpg", "./rf2.jpg", "./rf3.jpg"];
+    pictureNames.forEach(async (pictureName: string) => {
+      let { latitude: lat, longitude: lng } = await exifr.gps(pictureName);
+      console.log("lat,lng:", lat, lng);
+      await setPictures([
+        ...pictures,
+        { name: pictureName, lat: lat, lng: lng },
+      ]);
+      await console.log("pictures:", pictures);
+    });
+    await console.log("pictures all:", pictures);
   };
   useEffect(() => {
     // get the users current location on intial login
@@ -77,14 +83,16 @@ export default function Create() {
       }
     );
   }, []);
-  const onLoadDrawingManager = (drawingManager) => {
+  const onLoadDrawingManager = (
+    drawingManager: google.maps.drawing.DrawingManager
+  ) => {
     console.log(drawingManager);
   };
 
   // const onLoadPolygon = (polygon) => {
   //   console.log("onLoadPolygon: ", polygon);
   // };
-  const onPolygonComplete = (polygon) => {
+  const onPolygonComplete = (polygon: google.maps.Polygon) => {
     console.log(polygon);
     var coordStr = "";
     for (var i = 0; i < polygon.getPath().getLength(); i++) {
@@ -101,6 +109,7 @@ export default function Create() {
       // console.log("paths:", paths);
       return (
         <Polygon
+          key={item}
           // onLoad={onLoadPolygon}
           paths={paths}
           options={options}
@@ -165,10 +174,7 @@ export default function Create() {
   };
   return (
     isLoaded && (
-      <Grid
-        templateColumns="1fr"
-        templateRows={{ base: "repeat(2, 100vh)", large: "repeat(1, 100vh)" }}
-      >
+      <Grid templateColumns="1fr" templateRows="100vh">
         <View>
           <GoogleMap
             onLoad={mapOnLoad}
@@ -216,7 +222,7 @@ export default function Create() {
                 position={{ lat: pictures[0].lat, lng: pictures[0].lng }}
                 options={{ maxWidth: 250 }}
               >
-                <Image src={pictures[0].name} alt={undefined} width="20px" />
+                <Image src={pictures[0].name} alt={undefined} width="100px" />
               </InfoWindow>
             )}
           </GoogleMap>
