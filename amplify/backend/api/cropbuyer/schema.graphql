@@ -1,0 +1,37 @@
+type Record @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  farmID: ID! @index(name: "byFarm")
+  year: Int
+  statusRating: Int
+  yield: Float
+  volume: Float
+  memo: String
+  cropID: ID! @index(name: "byCrop")
+}
+
+type Crop @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Records: [Record] @hasMany(indexName: "byCrop", fields: ["id"])
+  image_url: String
+  description: String
+}
+
+type Grower @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Farms: [Farm] @hasMany(indexName: "byGrower", fields: ["id"])
+  name: String
+  email: String
+  phone: String
+  address: String
+  description: String
+}
+
+type Farm @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  growerID: ID! @index(name: "byGrower")
+  name: String
+  area: String
+  Records: [Record] @hasMany(indexName: "byFarm", fields: ["id"])
+  description: String
+} 

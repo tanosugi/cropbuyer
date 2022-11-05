@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3cropbuyerstorage",
+  "bucketName": "cropbuyer-storage",
+  "policyUUID": "d1ccc8d0",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}
