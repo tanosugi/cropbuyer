@@ -8,15 +8,12 @@ import {
   Polygon,
   useLoadScript,
 } from "@react-google-maps/api";
-
 import exifr from "exifr";
 import { useEffect, useState } from "react";
 
-const id = ["6e120bcd575d29f7"];
-
 const containerStyle = {
+  height: "90vh",
   width: "100%",
-  height: "100%",
 };
 
 const polygonStrToLatLng = (polygonStr: string) => {
@@ -36,7 +33,9 @@ const polygonStrToLatLng = (polygonStr: string) => {
   return ret;
 };
 
-export default function Create() {
+const mapIds = ["37dbbc4e73f92b7c"];
+
+const MyComponent = () => {
   const [pictures, setPictures] = useState<
     { name: string; lat: number; lng: number }[]
   >([]);
@@ -44,7 +43,6 @@ export default function Create() {
     "25.774,-80.19;18.466,-66.118;32.321,-64.757;25.774,-80.19;",
   ]);
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
-  const [map, setMap] = useState();
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete>();
   const onLoad = (autoC: google.maps.places.Autocomplete) =>
@@ -52,7 +50,7 @@ export default function Create() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: String(process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY),
     libraries: ["places", "drawing"],
-    mapIds: id,
+    mapIds: mapIds,
   });
   const onPlaceChanged = () => {
     // console.log("autocomplete:", autocomplete);
@@ -146,6 +144,12 @@ export default function Create() {
       const controlDiv = document.createElement("div");
       const controlUI = document.createElement("button");
 
+      // controlUI.style.width = "100px"; // setting the width to 200px
+      // controlUI.style.height = "30px"; // setting the height to 200px
+      // controlUI.style.background = "teal"; // setting the background color to teal
+      // controlUI.style.color = "white"; // setting the color to white
+      controlUI.style.fontSize = "14px"; // setting the font size to 20px
+
       controlUI.classList.add("ui-button");
       controlUI.innerText = `${text}`;
       controlUI.addEventListener("click", () => {
@@ -168,13 +172,6 @@ export default function Create() {
       }
     };
   };
-  // const paths = [
-  //   { lat: 25.774, lng: -80.19 },
-  //   { lat: 18.466, lng: -66.118 },
-  //   { lat: 32.321, lng: -64.757 },
-  //   { lat: 25.774, lng: -80.19 },
-  // ];
-
   const options = {
     fillColor: "lightblue",
     fillOpacity: 1,
@@ -195,9 +192,8 @@ export default function Create() {
             onLoad={mapOnLoad}
             mapContainerStyle={containerStyle}
             center={coordinates}
-            // zoom={15}
-            zoom={1}
-            options={{ mapId: "caf2a1c5ecc8005e" }}
+            zoom={15}
+            options={{ mapId: "37dbbc4e73f92b7c" }}
           >
             <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
               <input
@@ -252,4 +248,6 @@ export default function Create() {
       </Grid>
     )
   );
-}
+};
+
+export default MyComponent;
