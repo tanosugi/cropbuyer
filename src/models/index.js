@@ -4,11 +4,12 @@ import { schema } from './schema';
 
 
 
-const { Record, Crop, Grower, Farm } = initSchema(schema);
+const { Grower, Farm, Crop, Record, PersonalSetting } = initSchema(schema);
 
 export {
-  Record,
-  Crop,
   Grower,
-  Farm
+  Farm,
+  Crop,
+  Record,
+  PersonalSetting
 };

@@ -1,12 +1,19 @@
 import { DrawingManager, Polygon } from "@react-google-maps/api";
-import { Dispatch, FC, ReactElement, SetStateAction } from "react";
+import Center from "layout/center";
+import { Farm } from "models";
+import { Dispatch, FC, ReactElement, SetStateAction, useState } from "react";
+import Modal from "react-modal";
 import { poligonOptions } from "styles/mapstyles";
+import { modalStyle } from "styles/modalStyle";
+import { EditFarmView } from "ui-components";
 import { polygonStrToLatLng } from "utils/maputil";
 
 const CreateDrawingManager: FC<{
   polygons: string[];
   setPolygons: Dispatch<SetStateAction<string[]>>;
 }> = ({ polygons, setPolygons }): ReactElement => {
+  const [modalToOpen, setModalToOpen] = useState("");
+  const [polygonString, setPolygonString] = useState("");
   const onLoadDrawingManager = (
     drawingManager: google.maps.drawing.DrawingManager
   ) => {
@@ -21,6 +28,8 @@ const CreateDrawingManager: FC<{
     // console.log(coordStr);
     setPolygons([...polygons, coordStr]);
     // console.log("polygons:", polygons);
+    setPolygonString(coordStr);
+    setModalToOpen("EditFarmView");
   };
 
   const createPolygonComponents = () => {
@@ -54,6 +63,17 @@ const CreateDrawingManager: FC<{
           },
         }}
       />
+      <Modal isOpen={modalToOpen == "EditFarmView"} style={modalStyle}>
+        <Center>
+          <EditFarmView
+            farm={new Farm({ polygonString: polygonString })}
+            overrides={{
+              "Edit Farm": { children: "Create Farm" },
+              Button34704491: { isDisabled: true },
+            }}
+          />
+        </Center>
+      </Modal>
     </>
   );
 };

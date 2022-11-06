@@ -20,7 +20,6 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "api": {
         "cropbuyer": {
-            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }

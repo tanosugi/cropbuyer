@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Record": {
-            "name": "Record",
+        "Grower": {
+            "name": "Grower",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,53 +10,53 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "farmID": {
-                    "name": "farmID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "year": {
-                    "name": "year",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "statusRating": {
-                    "name": "statusRating",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "yield": {
-                    "name": "yield",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "volume": {
-                    "name": "volume",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "memo": {
-                    "name": "memo",
+                "name": {
+                    "name": "name",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "cropID": {
-                    "name": "cropID",
+                "email": {
+                    "name": "email",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "phone": {
+                    "name": "phone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "image_url": {
+                    "name": "image_url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "s3Key": {
+                    "name": "s3Key",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -77,36 +77,119 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Records",
+            "pluralName": "Growers",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "key",
+                    "type": "auth",
                     "properties": {
-                        "name": "byFarm",
-                        "fields": [
-                            "farmID"
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
                         ]
                     }
+                }
+            ]
+        },
+        "Farm": {
+            "name": "Farm",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "growerName": {
+                    "name": "growerName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "area": {
+                    "name": "area",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "latestStatus": {
+                    "name": "latestStatus",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "polygonString": {
+                    "name": "polygonString",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "imaga_url": {
+                    "name": "imaga_url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Farms",
+            "attributes": [
                 {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCrop",
-                        "fields": [
-                            "cropID"
-                        ]
-                    }
+                    "type": "model",
+                    "properties": {}
                 },
                 {
                     "type": "auth",
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "create",
                                     "update",
@@ -135,20 +218,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "Records": {
-                    "name": "Records",
-                    "isArray": true,
-                    "type": {
-                        "model": "Record"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "cropID"
-                    }
                 },
                 "image_url": {
                     "name": "image_url",
@@ -193,7 +262,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "create",
                                     "update",
@@ -206,8 +275,8 @@ export const schema = {
                 }
             ]
         },
-        "Grower": {
-            "name": "Grower",
+        "Record": {
+            "name": "Record",
             "fields": {
                 "id": {
                     "name": "id",
@@ -216,50 +285,57 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Farms": {
-                    "name": "Farms",
-                    "isArray": true,
-                    "type": {
-                        "model": "Farm"
-                    },
+                "year": {
+                    "name": "year",
+                    "isArray": false,
+                    "type": "Int",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "growerID"
-                    }
+                    "attributes": []
                 },
-                "name": {
-                    "name": "name",
+                "cropName": {
+                    "name": "cropName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "email": {
-                    "name": "email",
+                "statusRating": {
+                    "name": "statusRating",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "yield": {
+                    "name": "yield",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "volume": {
+                    "name": "volume",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "farmName": {
+                    "name": "farmName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "phone": {
-                    "name": "phone",
+                "image_url": {
+                    "name": "image_url",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "description": {
-                    "name": "description",
+                "memo": {
+                    "name": "memo",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -283,7 +359,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Growers",
+            "pluralName": "Records",
             "attributes": [
                 {
                     "type": "model",
@@ -294,7 +370,7 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "allow": "private",
                                 "operations": [
                                     "create",
                                     "update",
@@ -307,8 +383,8 @@ export const schema = {
                 }
             ]
         },
-        "Farm": {
-            "name": "Farm",
+        "PersonalSetting": {
+            "name": "PersonalSetting",
             "fields": {
                 "id": {
                     "name": "id",
@@ -317,43 +393,36 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "growerID": {
-                    "name": "growerID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
+                "mapLat": {
+                    "name": "mapLat",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "area": {
-                    "name": "area",
+                "mapLng": {
+                    "name": "mapLng",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "Records": {
-                    "name": "Records",
-                    "isArray": true,
-                    "type": {
-                        "model": "Record"
-                    },
+                "mapZoom": {
+                    "name": "mapZoom",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "farmID"
-                    }
+                    "attributes": []
                 },
-                "description": {
-                    "name": "description",
+                "mapTilt": {
+                    "name": "mapTilt",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "mapRotate": {
+                    "name": "mapRotate",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -377,27 +446,21 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Farms",
+            "pluralName": "PersonalSettings",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "key",
-                    "properties": {
-                        "name": "byGrower",
-                        "fields": [
-                            "growerID"
-                        ]
-                    }
-                },
-                {
                     "type": "auth",
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
                                 "operations": [
                                     "create",
                                     "update",
@@ -413,5 +476,6 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "9ad6d385251dcf86b1aefc5437db3af6"
+    "codegenVersion": "3.3.1",
+    "version": "a7d894efee92ba5bcc8940acc2958498"
 };

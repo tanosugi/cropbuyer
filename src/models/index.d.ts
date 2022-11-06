@@ -1,12 +1,6 @@
 import { ModelInit, MutableModel } from "@aws-amplify/datastore";
-
-type RecordMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-type CropMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
+// @ts-ignore
+import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 type GrowerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -16,56 +10,164 @@ type FarmMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Record {
-  readonly id: string;
-  readonly farmID: string;
-  readonly year?: number | null;
-  readonly statusRating?: number | null;
-  readonly yield?: number | null;
-  readonly volume?: number | null;
-  readonly memo?: string | null;
-  readonly cropID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Record, RecordMetaData>);
-  static copyOf(source: Record, mutator: (draft: MutableModel<Record, RecordMetaData>) => MutableModel<Record, RecordMetaData> | void): Record;
+type CropMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Crop {
-  readonly id: string;
-  readonly name?: string | null;
-  readonly Records?: (Record | null)[] | null;
-  readonly image_url?: string | null;
-  readonly description?: string | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Crop, CropMetaData>);
-  static copyOf(source: Crop, mutator: (draft: MutableModel<Crop, CropMetaData>) => MutableModel<Crop, CropMetaData> | void): Crop;
+type RecordMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Grower {
+type PersonalSettingMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EagerGrower = {
   readonly id: string;
-  readonly Farms?: (Farm | null)[] | null;
   readonly name?: string | null;
   readonly email?: string | null;
   readonly phone?: string | null;
   readonly address?: string | null;
+  readonly image_url?: string | null;
   readonly description?: string | null;
+  readonly s3Key?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Grower, GrowerMetaData>);
-  static copyOf(source: Grower, mutator: (draft: MutableModel<Grower, GrowerMetaData>) => MutableModel<Grower, GrowerMetaData> | void): Grower;
 }
 
-export declare class Farm {
+type LazyGrower = {
   readonly id: string;
-  readonly growerID: string;
   readonly name?: string | null;
+  readonly email?: string | null;
+  readonly phone?: string | null;
+  readonly address?: string | null;
+  readonly image_url?: string | null;
+  readonly description?: string | null;
+  readonly s3Key?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Grower = LazyLoading extends LazyLoadingDisabled ? EagerGrower : LazyGrower
+
+export declare const Grower: (new (init: ModelInit<Grower, GrowerMetaData>) => Grower) & {
+  copyOf(source: Grower, mutator: (draft: MutableModel<Grower, GrowerMetaData>) => MutableModel<Grower, GrowerMetaData> | void): Grower;
+}
+
+type EagerFarm = {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly growerName?: string | null;
   readonly area?: string | null;
-  readonly Records?: (Record | null)[] | null;
+  readonly latestStatus?: number | null;
+  readonly polygonString?: string | null;
+  readonly imaga_url?: string | null;
   readonly description?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Farm, FarmMetaData>);
-  static copyOf(source: Farm, mutator: (draft: MutableModel<Farm, FarmMetaData>) => MutableModel<Farm, FarmMetaData> | void): Farm;
+}
+
+type LazyFarm = {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly growerName?: string | null;
+  readonly area?: string | null;
+  readonly latestStatus?: number | null;
+  readonly polygonString?: string | null;
+  readonly imaga_url?: string | null;
+  readonly description?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Farm = LazyLoading extends LazyLoadingDisabled ? EagerFarm : LazyFarm
+
+export declare const Farm: (new (init: ModelInit<Farm, FarmMetaData>) => Farm) & {
+  copyOf(source: Farm, mutator: (draft: MutableModel<Farm, FarmMetaData>) => MutableModel<Farm, FarmMetaData> | void): Farm;
+}
+
+type EagerCrop = {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly image_url?: string | null;
+  readonly description?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyCrop = {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly image_url?: string | null;
+  readonly description?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Crop = LazyLoading extends LazyLoadingDisabled ? EagerCrop : LazyCrop
+
+export declare const Crop: (new (init: ModelInit<Crop, CropMetaData>) => Crop) & {
+  copyOf(source: Crop, mutator: (draft: MutableModel<Crop, CropMetaData>) => MutableModel<Crop, CropMetaData> | void): Crop;
+}
+
+type EagerRecord = {
+  readonly id: string;
+  readonly year?: number | null;
+  readonly cropName?: string | null;
+  readonly statusRating?: number | null;
+  readonly yield?: number | null;
+  readonly volume?: number | null;
+  readonly farmName?: string | null;
+  readonly image_url?: string | null;
+  readonly memo?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyRecord = {
+  readonly id: string;
+  readonly year?: number | null;
+  readonly cropName?: string | null;
+  readonly statusRating?: number | null;
+  readonly yield?: number | null;
+  readonly volume?: number | null;
+  readonly farmName?: string | null;
+  readonly image_url?: string | null;
+  readonly memo?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Record = LazyLoading extends LazyLoadingDisabled ? EagerRecord : LazyRecord
+
+export declare const Record: (new (init: ModelInit<Record, RecordMetaData>) => Record) & {
+  copyOf(source: Record, mutator: (draft: MutableModel<Record, RecordMetaData>) => MutableModel<Record, RecordMetaData> | void): Record;
+}
+
+type EagerPersonalSetting = {
+  readonly id: string;
+  readonly mapLat?: string | null;
+  readonly mapLng?: string | null;
+  readonly mapZoom?: string | null;
+  readonly mapTilt?: string | null;
+  readonly mapRotate?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPersonalSetting = {
+  readonly id: string;
+  readonly mapLat?: string | null;
+  readonly mapLng?: string | null;
+  readonly mapZoom?: string | null;
+  readonly mapTilt?: string | null;
+  readonly mapRotate?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type PersonalSetting = LazyLoading extends LazyLoadingDisabled ? EagerPersonalSetting : LazyPersonalSetting
+
+export declare const PersonalSetting: (new (init: ModelInit<PersonalSetting, PersonalSettingMetaData>) => PersonalSetting) & {
+  copyOf(source: PersonalSetting, mutator: (draft: MutableModel<PersonalSetting, PersonalSettingMetaData>) => MutableModel<PersonalSetting, PersonalSettingMetaData> | void): PersonalSetting;
 }

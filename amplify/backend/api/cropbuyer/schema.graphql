@@ -1,37 +1,50 @@
-type Record @model @auth(rules: [{allow: public}]) {
+type Grower @model @auth(rules: [{allow: private}]) {
   id: ID!
-  farmID: ID! @index(name: "byFarm")
-  year: Int
-  statusRating: Int
-  yield: Float
-  volume: Float
-  memo: String
-  cropID: ID! @index(name: "byCrop")
-}
-
-type Crop @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  name: String
-  Records: [Record] @hasMany(indexName: "byCrop", fields: ["id"])
-  image_url: String
-  description: String
-}
-
-type Grower @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  Farms: [Farm] @hasMany(indexName: "byGrower", fields: ["id"])
   name: String
   email: String
   phone: String
   address: String
+  image_url: String
+  description: String
+  s3Key: String
+}
+
+type Farm @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  name: String
+  growerName: String
+  area: String
+  latestStatus: Int
+  polygonString: String
+  imaga_url: String
   description: String
 }
 
-type Farm @model @auth(rules: [{allow: public}]) {
+type Crop @model @auth(rules: [{allow: private}]) {
   id: ID!
-  growerID: ID! @index(name: "byGrower")
   name: String
-  area: String
-  Records: [Record] @hasMany(indexName: "byFarm", fields: ["id"])
+  image_url: String
   description: String
-} 
+}
+
+type Record @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  year: Int
+  cropName: String
+  statusRating: Int
+  yield: Float
+  volume: Float
+  farmName: String
+  image_url: String
+  memo: String
+}
+
+type PersonalSetting @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  mapLat: String
+  mapLng: String
+  mapZoom: String
+  mapTilt: String
+  mapRotate: String
+}
+ 
