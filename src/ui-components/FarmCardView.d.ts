@@ -10,6 +10,7 @@ import { Farm } from "../models";
 import { FlexProps } from "@aws-amplify/ui-react";
 export declare type FarmCardViewProps = React.PropsWithChildren<Partial<FlexProps> & {
     farm?: Farm;
+    rectangle1?: React.ReactNode;
 } & {
     overrides?: EscapeHatchProps | undefined | null;
 }>;

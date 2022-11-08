@@ -13,9 +13,9 @@ import {
 } from "@aws-amplify/ui-react/internal";
 import { Farm } from "../models";
 import { schema } from "../models/schema";
-import { Flex, Icon, Image, Rating, Text, View } from "@aws-amplify/ui-react";
+import { Flex, Icon, Rating, Text, View } from "@aws-amplify/ui-react";
 export default function FarmCardView(props) {
-  const { farm, overrides, ...rest } = props;
+  const { farm, rectangle1, overrides, ...rest } = props;
   const frameTwoFiveOnClick = useNavigateAction({
     type: "url",
     url: `${"../record-list/"}${farm?.id}`,
@@ -40,7 +40,7 @@ export default function FarmCardView(props) {
       {...rest}
       {...getOverrideProps(overrides, "FarmCardView")}
     >
-      <Image
+      <View
         width="112px"
         height="112px"
         display="block"
@@ -50,10 +50,10 @@ export default function FarmCardView(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        objectFit="cover"
-        slot="map"
-        {...getOverrideProps(overrides, "image 2")}
-      ></Image>
+        backgroundColor="rgba(217,217,217,1)"
+        children={rectangle1}
+        {...getOverrideProps(overrides, "Rectangle 1")}
+      ></View>
       <Flex
         gap="0"
         direction="column"
