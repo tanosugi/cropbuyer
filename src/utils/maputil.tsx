@@ -2,6 +2,9 @@ export const polygonStrToLatLng = (
   polygonStr: string
 ): { lat: number; lng: number }[] => {
   // console.log("polygonStr:", polygonStr);
+  if (!polygonStr) {
+    return [];
+  }
   const latAndLngArray = polygonStr.split(";");
   // console.log("latAndLngArray:", latAndLngArray);
   let ret: { lat: number; lng: number }[] = [];

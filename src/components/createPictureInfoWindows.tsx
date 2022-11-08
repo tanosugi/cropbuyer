@@ -1,5 +1,6 @@
 import { Image } from "@aws-amplify/ui-react";
 import { InfoWindow } from "@react-google-maps/api";
+import { Storage } from "aws-amplify";
 import exifr from "exifr";
 import { ReactElement, useEffect, useState } from "react";
 
@@ -31,6 +32,8 @@ const CreatePictureInfoWindows = (): ReactElement => {
   useEffect(() => {
     // get the users current location on intial login
     loadLatLngFromPicture();
+    Storage.list("uploaded/") // for listing ALL files without prefix, pass '' instead
+      .then((result) => console.log(result));
   }, []);
   return (
     pictures && (
