@@ -144,7 +144,7 @@ export default function FarmCardView(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={`${"Area : "}${farm?.area}${" hectare"}`}
+            children={`${farm?.area}${" hectare"}`}
             {...getOverrideProps(overrides, "Area : 350 hectare")}
           ></Text>
         </Flex>

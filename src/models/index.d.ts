@@ -2,6 +2,10 @@ import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
+type PictureMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type GrowerMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -20,6 +24,40 @@ type RecordMetaData = {
 
 type PersonalSettingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EagerPicture = {
+  readonly id: string;
+  readonly s3KeyRaw?: string | null;
+  readonly s3KeyResized?: string | null;
+  readonly urlRaw?: string | null;
+  readonly urlResized?: string | null;
+  readonly lat?: number | null;
+  readonly lng?: number | null;
+  readonly createYear?: string | null;
+  readonly createDate?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPicture = {
+  readonly id: string;
+  readonly s3KeyRaw?: string | null;
+  readonly s3KeyResized?: string | null;
+  readonly urlRaw?: string | null;
+  readonly urlResized?: string | null;
+  readonly lat?: number | null;
+  readonly lng?: number | null;
+  readonly createYear?: string | null;
+  readonly createDate?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Picture = LazyLoading extends LazyLoadingDisabled ? EagerPicture : LazyPicture
+
+export declare const Picture: (new (init: ModelInit<Picture, PictureMetaData>) => Picture) & {
+  copyOf(source: Picture, mutator: (draft: MutableModel<Picture, PictureMetaData>) => MutableModel<Picture, PictureMetaData> | void): Picture;
 }
 
 type EagerGrower = {

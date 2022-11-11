@@ -1,3 +1,4 @@
+import config from "aws-exports";
 import { Image } from "@aws-amplify/ui-react";
 import { InfoWindow } from "@react-google-maps/api";
 import { Storage } from "aws-amplify";
