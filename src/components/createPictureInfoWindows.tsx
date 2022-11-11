@@ -5,14 +5,24 @@ import exifr from "exifr";
 import { ReactElement, useEffect, useState } from "react";
 
 const CreatePictureInfoWindows = (): ReactElement => {
+  const [urls, setUrls] = useState<string[]>([]);
   const [pictures, setPictures] = useState<
     { name: string; lat: number; lng: number }[]
   >([]);
   const loadLatLngFromPicture = async () => {
+    console.log("urls in loadLatLngFromPicture:", urls);
     const pictureNames = ["./rf1.jpg", "./rf2.jpg", "./rf3.jpg"];
-    await pictureNames.forEach(async (pictureName: string) => {
-      let { latitude: lat, longitude: lng } = await exifr.gps(pictureName);
-      let { CreateDate } = await exifr.parse(pictureName, {
+    await urls.forEach(async (pictureName: string) => {
+      const resp = await fetch(pictureName);
+      console.log("resp:", resp);
+      const respBlob = await resp.blob();
+      console.log("respBlob:", respBlob);
+      const pictureFile = await new File([respBlob], "image.jpg");
+      console.log("pictureFile:", pictureFile);
+      console.log("pictureName:", pictureName);
+      const { latitude: lat, longitude: lng } = await exifr.gps(pictureFile);
+      console.log("lat,lng:", lat, lng);
+      let { CreateDate } = await exifr.parse(pictureFile, {
         pick: ["CreateDate"],
       });
       console.log(
@@ -29,12 +39,24 @@ const CreatePictureInfoWindows = (): ReactElement => {
     });
     // await console.log("pictures all:", pictures);
   };
+  const loadPictures = async () => {
+    const listPictures = await Storage.list("uploaded/");
+    // console.log("listPictures:", listPictures);
+    const retUrls = await Promise.all(
+      listPictures.map(async (item) => await Storage.get(item.key || ""))
+    );
+    // console.log("retUrls:", retUrls);
+    await setUrls(retUrls);
+    await console.log("urls:", urls);
+  };
   useEffect(() => {
     // get the users current location on intial login
-    loadLatLngFromPicture();
-    Storage.list("uploaded/") // for listing ALL files without prefix, pass '' instead
-      .then((result) => console.log(result));
+    loadPictures();
+    console.log("urls:", urls);
   }, []);
+  useEffect(() => {
+    loadLatLngFromPicture();
+  }, [urls]);
   return (
     pictures && (
       <>

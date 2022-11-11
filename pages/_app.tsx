@@ -4,6 +4,7 @@ import { Amplify } from "aws-amplify";
 import config from "aws-exports";
 import type { AppProps } from "next/app";
 import { useState } from "react";
+import "styles/globals.css";
 import { studioTheme } from "ui-components";
 
 Amplify.configure(config);

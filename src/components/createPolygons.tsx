@@ -38,11 +38,6 @@ const CreatePolygons: FC<{
               draggable={true}
               editable={true}
               key={item?.polygonString}
-              // onLoad={onLoadPolygon}
-              onMouseMove={(e) => {
-                console.log("item.name:", item.name, e.latLng);
-              }}
-              onMouseOver={() => setIdMouseOvered(item.id)}
               paths={paths}
               options={poligonOptions}
             />
@@ -56,6 +51,7 @@ const CreatePolygons: FC<{
             <Marker
               position={polygonStrToCenterLatLng(item?.polygonString || "")}
               onMouseOver={() => setIdMouseOvered(item.id)}
+              onClick={() => setIdMouseOvered(item.id)}
               opacity={0.1}
             />
           </>
