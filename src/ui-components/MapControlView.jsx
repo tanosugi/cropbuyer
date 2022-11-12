@@ -84,7 +84,7 @@ export default function MapControlView(props) {
           padding="0px 4px 0px 4px"
           label="Yearly"
           size="default"
-          defaultChecked={true}
+          defaultChecked={false}
           isDisabled={false}
           labelPosition="start"
           {...getOverrideProps(overrides, "SwitchField35313348")}

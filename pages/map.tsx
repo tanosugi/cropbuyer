@@ -13,14 +13,24 @@ const containerStyle = {
   height: "100%",
   width: "100%",
 };
+const libraries: (
+  | "drawing"
+  | "geometry"
+  | "localContext"
+  | "places"
+  | "visualization"
+)[] = ["places", "drawing"];
 const MyComponent = () => {
+  const [isShowFarmInfo, setIsShowFarmInfo] = useState(true);
+  const [isShowPictures, setIsShowPictures] = useState(true);
+  const [isYearly, setIsYearly] = useState(false);
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
   const [polygons, setPolygons] = useState([
     "25.774,-80.19;18.466,-66.118;32.321,-64.757;25.774,-80.19;",
   ]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: String(process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY),
-    libraries: ["places", "drawing"],
+    libraries: libraries,
     mapIds: [String(process.env.NEXT_PUBLIC_GOOGLE_MAP_ID)],
   });
   useEffect(() => {
@@ -37,9 +47,35 @@ const MyComponent = () => {
   return (
     isLoaded && (
       <Authenticator>
-        <Flex height="100vh" direction="column" gap="0" margin="0">
+        <Flex height="95vh" direction="column" gap="0" margin="0">
           <Layout>
-            <MapControlView />
+            <MapControlView
+              overrides={{
+                SwitchField35313346: {
+                  value: isShowFarmInfo,
+                  onChange: (
+                    event: React.ChangeEventHandler<HTMLInputElement>
+                  ) => {
+                    setIsShowFarmInfo(!isShowFarmInfo);
+                    console.log("isShowFarmInfo:", isShowFarmInfo);
+                  },
+                },
+                SwitchField35313347: {
+                  value: isShowPictures,
+                  onChange: (e: React.ChangeEventHandler<HTMLInputElement>) => {
+                    setIsShowPictures(!isShowPictures);
+                    console.log("isShowPictures:", isShowPictures);
+                  },
+                },
+                SwitchField35313348: {
+                  value: isYearly,
+                  onChange: (e: React.ChangeEventHandler<HTMLInputElement>) => {
+                    setIsYearly(!isYearly);
+                    console.log("isYearly:", isYearly);
+                  },
+                },
+              }}
+            />
             <View grow={1} height="100px">
               <GoogleMap
                 onLoad={mapOnLoad}
