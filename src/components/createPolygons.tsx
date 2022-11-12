@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { InfoWindow, Marker, Polygon } from "@react-google-maps/api";
 import { FC, ReactElement } from "react";
 import { poligonOptions } from "styles/mapstyles";
-import { FarmDetailView } from "ui-components";
+import { FarmInfoWindowView } from "ui-components";
 import { polygonStrToCenterLatLng, polygonStrToLatLng } from "utils/maputil";
 
 const CreatePolygons: FC<{
@@ -37,18 +37,20 @@ const CreatePolygons: FC<{
             <Polygon
               draggable={true}
               editable={true}
-              key={item?.polygonString}
+              key={`${item?.polygonString}-Polygon`}
               paths={paths}
               options={poligonOptions}
             />
             {item.id == idMouseOvered && (
               <InfoWindow
+                // key={`${item?.polygonString}-InfoWindow`}
                 position={polygonStrToCenterLatLng(item?.polygonString || "")}
               >
-                <FarmDetailView farm={item} />
+                <FarmInfoWindowView farm={item} />
               </InfoWindow>
             )}
             <Marker
+              // key={`${item?.polygonString}-Marker`}
               position={polygonStrToCenterLatLng(item?.polygonString || "")}
               onMouseOver={() => setIdMouseOvered(item.id)}
               onClick={() => setIdMouseOvered(item.id)}

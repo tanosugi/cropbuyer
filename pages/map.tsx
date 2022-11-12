@@ -7,6 +7,7 @@ import CreatePictureInfoWindows from "components/createPictureInfoWindows";
 import CreatePolygons from "components/createPolygons";
 import Layout from "layout/layout";
 import { useEffect, useState } from "react";
+import { MapControlView } from "ui-components";
 import { addTiltRotateControl } from "utils/addTiltRotateControl";
 const containerStyle = {
   height: "90vh",
@@ -37,7 +38,8 @@ const MyComponent = () => {
     isLoaded && (
       <Authenticator>
         <Layout>
-          <Grid templateColumns="1fr" templateRows="100vh">
+          <MapControlView />
+          <Grid templateColumns="100%" templateRows="100%">
             <View>
               <GoogleMap
                 onLoad={mapOnLoad}

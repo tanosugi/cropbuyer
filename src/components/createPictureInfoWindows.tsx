@@ -1,84 +1,68 @@
-import { Image } from "@aws-amplify/ui-react";
+// import { Image } from "@aws-amplify/ui-react";
+// import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
+import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
 import { InfoWindow } from "@react-google-maps/api";
-import { DataStore, Storage } from "aws-amplify";
-import exifr from "exifr";
+import { DataStore } from "aws-amplify";
 import { Picture } from "models";
 import { ReactElement, useEffect, useState } from "react";
 
 const CreatePictureInfoWindows = (): ReactElement => {
-  const [urls, setUrls] = useState<string[]>([]);
-  const [pictures, setPictures] = useState<
-    { name: string; lat: number; lng: number }[]
-  >([]);
-  const loadLatLngFromPicture = async () => {
-    console.log("urls in loadLatLngFromPicture:", urls);
-    const pictureNames = ["./rf1.jpg", "./rf2.jpg", "./rf3.jpg"];
-    await urls.forEach(async (pictureName: string) => {
-      const resp = await fetch(pictureName);
-      console.log("resp:", resp);
-      const respBlob = await resp.blob();
-      console.log("respBlob:", respBlob);
-      const pictureFile = await new File([respBlob], "image.jpg");
-      console.log("pictureFile:", pictureFile);
-      console.log("pictureName:", pictureName);
-      const { latitude: lat, longitude: lng } = await exifr.gps(pictureFile);
-      console.log("lat,lng:", lat, lng);
-      let { CreateDate } = await exifr.parse(pictureFile, {
-        pick: ["CreateDate"],
-      });
-      console.log(
-        "CreateDate:",
-        CreateDate.getFullYear(),
-        CreateDate.toLocaleDateString()
-      );
-      // await console.log("lat,lng:", lat, lng);
-      await setPictures((prevPicture) => {
-        console.log("prevPicture:", prevPicture);
-        return [...prevPicture, { name: pictureName, lat: lat, lng: lng }];
-      });
-      // await console.log("pictures:", pictures);
-    });
-    // await console.log("pictures all:", pictures);
-  };
+  const [pictures, setPictures] = useState<Picture[]>();
   const loadPictures = async () => {
-    const listPictures = await Storage.list("uploaded/");
     const respPictures = await DataStore.query(Picture);
     console.log("respPictures:", respPictures);
     // console.log("listPictures:", listPictures);
-    const retUrls = await Promise.all(
-      listPictures.map(async (item) => await Storage.get(item.key || ""))
-    );
-    // console.log("retUrls:", retUrls);
-    await setUrls(retUrls);
-    await console.log("urls:", urls);
+    setPictures(respPictures);
   };
   useEffect(() => {
     // get the users current location on intial login
     loadPictures();
-    console.log("urls:", urls);
   }, []);
-  useEffect(() => {
-    loadLatLngFromPicture();
-  }, [urls]);
   return (
-    pictures && (
-      <>
-        {pictures.map((picture) => (
-          <InfoWindow
-            key={picture.name}
-            position={{ lat: picture.lat, lng: picture.lng }}
-            options={{ maxWidth: 250 }}
-          >
-            <Image
-              src={picture.name}
-              alt={undefined}
-              maxWidth="100px"
-              maxHeight="100px"
-            />
-          </InfoWindow>
-        ))}
-      </>
-    )
+    <>
+      {pictures &&
+        pictures.map((picture: Picture) => {
+          console.log("picture.s3KeyResized:", picture.s3KeyResized);
+          return (
+            <InfoWindow
+              key={picture.s3KeyResized}
+              position={{ lat: picture.lat || 0, lng: picture.lng || 0 }}
+              options={{ maxWidth: 250 }}
+            >
+              {/* <>{"abc"}</> */}
+
+              {/* <View height="100px"> */}
+              {/* {"abc"} */}
+              <AmplifyS3Image
+                style={{ height: "100px" }}
+                imgKey={picture.s3KeyResized || ""}
+                // style={{ width: "10px", height: "10px" }}
+              />
+              {/* </View> */}
+            </InfoWindow>
+          );
+        })}
+    </>
+    //      {pictures.map((picture) =>
+    // (
+    //           <>
+    //             {"abc"}{console.log('picture.s3KeyResized:', picture.s3KeyResized);}
+    //             {/* <AmplifyS3Image
+    //               key={picture.s3KeyResized}
+    //               maxWidth="100px"
+    //               maxHeight="100px"
+    //             /> */}
+    //             {/* <Image
+    //             src={picture.name}
+    //             alt={undefined}
+    //             maxWidth="100px"
+    //             maxHeight="100px"
+    //           /> */}
+    //           </>
+    //         </InfoWindow>)
+    //         )}
+    //     </>
+    //   )
   );
 };
 

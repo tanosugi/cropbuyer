@@ -1,8 +1,10 @@
 import { Storage } from "@aws-amplify/storage";
+import { Authenticator } from "@aws-amplify/ui-react";
 import { AmplifyS3Album } from "@aws-amplify/ui-react/legacy";
 import { DataStore } from "aws-amplify";
 import config from "aws-exports";
 import exifr from "exifr";
+import Layout from "layout/layout";
 import { Picture } from "models";
 import { useCallback } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
@@ -64,20 +66,24 @@ const DropImage = () => {
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
-    <section className="container">
-      <div
-        {...getRootProps()}
-        style={
-          isDragActive
-            ? { ...dropzoneStyles, ...dropzoneActive }
-            : dropzoneStyles
-        }
-      >
-        <input {...getInputProps()} />
-        <p>ここに</p>
-      </div>
-      <AmplifyS3Album path={"/"} />
-    </section>
+    <Authenticator>
+      <Layout>
+        <section className="container">
+          <div
+            {...getRootProps()}
+            style={
+              isDragActive
+                ? { ...dropzoneStyles, ...dropzoneActive }
+                : dropzoneStyles
+            }
+          >
+            <input {...getInputProps()} />
+            <p>Drag & Drop Picture or Click Here to Upload</p>
+          </div>
+          <AmplifyS3Album path={"resized/"} picker={false} />
+        </section>
+      </Layout>
+    </Authenticator>
   );
 };
 
@@ -85,8 +91,8 @@ const resizeFile = (file: File) =>
   new Promise<string>((resolve) => {
     Resizer.imageFileResizer(
       file,
-      300,
-      300,
+      100,
+      100,
       "JPEG",
       100,
       0,
