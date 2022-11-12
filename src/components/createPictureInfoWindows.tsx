@@ -2,67 +2,56 @@
 // import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
 import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
 import { InfoWindow } from "@react-google-maps/api";
-import { DataStore } from "aws-amplify";
+import { DataStore, Predicates } from "aws-amplify";
 import { Picture } from "models";
-import { ReactElement, useEffect, useState } from "react";
+import { FC, ReactElement, useEffect, useState } from "react";
 
-const CreatePictureInfoWindows = (): ReactElement => {
+const CreatePictureInfoWindows: FC<{
+  isYearly: boolean;
+  yearToShow: number;
+}> = ({ isYearly, yearToShow }): ReactElement => {
   const [pictures, setPictures] = useState<Picture[]>();
   const loadPictures = async () => {
-    const respPictures = await DataStore.query(Picture);
-    console.log("respPictures:", respPictures);
+    const respPictures = await DataStore.query(
+      Picture,
+      isYearly ? (p) => p.createYear("eq", yearToShow) : Predicates.ALL
+    );
+    await console.log("respPictures:", respPictures);
     // console.log("listPictures:", listPictures);
-    setPictures(respPictures);
+    await setPictures(respPictures);
   };
   useEffect(() => {
     // get the users current location on intial login
     loadPictures();
-  }, []);
+    console.log("yearToShow:", yearToShow);
+  }, [isYearly, yearToShow]);
   return (
     <>
       {pictures &&
         pictures.map((picture: Picture) => {
-          console.log("picture.s3KeyResized:", picture.s3KeyResized);
-          return (
+          // console.log("picture.s3KeyResized:", picture.s3KeyResized);
+          console.log(
+            "!isYearly || yearToShow == picture?.createYear:",
+            picture?.s3KeyRaw,
+            !isYearly || yearToShow == picture?.createYear
+          );
+          return !isYearly || yearToShow == picture?.createYear ? (
             <InfoWindow
               key={picture.s3KeyResized}
               position={{ lat: picture.lat || 0, lng: picture.lng || 0 }}
               options={{ maxWidth: 250 }}
             >
-              {/* <>{"abc"}</> */}
-
-              {/* <View height="100px"> */}
-              {/* {"abc"} */}
               <AmplifyS3Image
                 style={{ height: "100px" }}
                 imgKey={picture.s3KeyResized || ""}
-                // style={{ width: "10px", height: "10px" }}
               />
               {/* </View> */}
             </InfoWindow>
+          ) : (
+            <></>
           );
         })}
     </>
-    //      {pictures.map((picture) =>
-    // (
-    //           <>
-    //             {"abc"}{console.log('picture.s3KeyResized:', picture.s3KeyResized);}
-    //             {/* <AmplifyS3Image
-    //               key={picture.s3KeyResized}
-    //               maxWidth="100px"
-    //               maxHeight="100px"
-    //             /> */}
-    //             {/* <Image
-    //             src={picture.name}
-    //             alt={undefined}
-    //             maxWidth="100px"
-    //             maxHeight="100px"
-    //           /> */}
-    //           </>
-    //         </InfoWindow>)
-    //         )}
-    //     </>
-    //   )
   );
 };
 

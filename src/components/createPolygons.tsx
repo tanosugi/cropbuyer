@@ -9,10 +9,9 @@ import { FarmInfoWindowView } from "ui-components";
 import { polygonStrToCenterLatLng, polygonStrToLatLng } from "utils/maputil";
 
 const CreatePolygons: FC<{
-  polygons: string[];
-}> = ({ polygons }): ReactElement => {
+  isShowFarmInfo: boolean;
+}> = ({ isShowFarmInfo }): ReactElement => {
   const [idMouseOvered, setIdMouseOvered] = useState("");
-  const [polygons2, setPolygons2] = useState([]);
   const [farms, setFarms] = useState<Farm[]>();
   const fetchFarm = async () => {
     const respFarm = await DataStore.query(Farm);
@@ -41,7 +40,7 @@ const CreatePolygons: FC<{
               paths={paths}
               options={poligonOptions}
             />
-            {item.id == idMouseOvered && (
+            {(item.id == idMouseOvered || isShowFarmInfo) && (
               <InfoWindow
                 // key={`${item?.polygonString}-InfoWindow`}
                 position={polygonStrToCenterLatLng(item?.polygonString || "")}

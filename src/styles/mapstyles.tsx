@@ -1,9 +1,5 @@
 import { CSSProperties } from "react";
-
-export const poligonOptions = {
-  fillColor: "lightblue",
-  fillOpacity: 1,
-  strokeColor: "red",
+export const poligonOptionsBasic = {
   strokeOpacity: 1,
   strokeWeight: 2,
   clickable: false,
@@ -11,6 +7,12 @@ export const poligonOptions = {
   editable: false,
   geodesic: false,
   zIndex: 1,
+};
+export const poligonOptions = {
+  fillColor: "orange",
+  fillOpacity: 0.5,
+  strokeColor: "orange",
+  ...poligonOptionsBasic,
 };
 export const autocompleteStyle: CSSProperties = {
   boxSizing: `border-box`,

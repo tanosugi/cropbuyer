@@ -24,6 +24,7 @@ const MyComponent = () => {
   const [isShowFarmInfo, setIsShowFarmInfo] = useState(true);
   const [isShowPictures, setIsShowPictures] = useState(true);
   const [isYearly, setIsYearly] = useState(false);
+  const [yearToShow, setYearToShow] = useState<number>(2022);
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
   const [polygons, setPolygons] = useState([
     "25.774,-80.19;18.466,-66.118;32.321,-64.757;25.774,-80.19;",
@@ -74,6 +75,17 @@ const MyComponent = () => {
                     console.log("isYearly:", isYearly);
                   },
                 },
+                SliderField: {
+                  isDisabled: !isYearly,
+                  isValueHidden: !isYearly,
+                  value: yearToShow,
+                  min: 2015,
+                  max: 2023,
+                  onChange: (value: number) => {
+                    setYearToShow(value);
+                    // console.log("yearToShow:", yearToShow);
+                  },
+                },
               }}
             />
             <View grow={1} height="100px">
@@ -91,8 +103,13 @@ const MyComponent = () => {
                   polygons={polygons}
                   setPolygons={setPolygons}
                 />
-                <CreatePolygons polygons={polygons} />
-                <CreatePictureInfoWindows />
+                <CreatePolygons isShowFarmInfo={isShowFarmInfo} />
+                {isShowPictures && (
+                  <CreatePictureInfoWindows
+                    isYearly={isYearly}
+                    yearToShow={yearToShow}
+                  />
+                )}
               </GoogleMap>
             </View>
           </Layout>
