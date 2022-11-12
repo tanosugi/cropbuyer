@@ -1,9 +1,9 @@
 import { Storage } from "@aws-amplify/storage";
 import { AmplifyS3Album } from "@aws-amplify/ui-react/legacy";
 import { DataStore } from "aws-amplify";
+import config from "aws-exports";
 import exifr from "exifr";
 import { Picture } from "models";
-import { config } from "process";
 import { useCallback } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import Resizer from "react-image-file-resizer";
@@ -17,12 +17,13 @@ const DropImage = () => {
   };
   const onDrop = useCallback(async (acceptedFiles: FileWithPath[]) => {
     acceptedFiles.forEach(async (acceptedFile: FileWithPath) => {
+      const fileName = acceptedFile.name;
       const resizedBlob = dataURIToBlob(await resizeFile(acceptedFile));
       let resizedFile = new File([resizedBlob], acceptedFile.name);
       // console.log("acceptedFiles:", acceptedFiles);
       // console.log("resizedFile:", resizedFile);
-      await uploadImage(acceptedFile, "raw/" + acceptedFile.name);
-      await uploadImage(resizedFile, "resized/" + resizedFile.name);
+      await uploadImage(acceptedFile, "raw/" + fileName);
+      await uploadImage(resizedFile, "resized/" + fileName);
       const respExifrGps = await exifr.gps(acceptedFile);
       // console.log("respExifrGps:", respExifrGps);
       if (respExifrGps?.latitude && respExifrGps?.longitude) {
@@ -41,18 +42,23 @@ const DropImage = () => {
         //   CreateDate
         // );
       }
-      await DataStore.save(
-        new Picture({
-          s3KeyRaw: ,
-          s3KeyResized: "",
-          urlRaw: config?.aws_app,
-          urlResized: "",
-          lat: respExifrGps.latitude,
-          lng: respExifrGps.longitude,
-          createDate: respExifrParse?.CreateDate,
-          createYear: respExifrParse?.CreateDate?.getFullYear(),
-        })
+      // const picture = new Picture({});
+      console.log(
+        "respExifrParse?.CreateDate.toISOString():",
+        respExifrParse?.CreateDate.toISOString()
       );
+      const picture = new Picture({
+        s3KeyRaw: `raw/${fileName}`,
+        s3KeyResized: `resized/${fileName}`,
+        urlRaw: `https://${config.aws_user_files_s3_bucket}.s3.${config.aws_user_files_s3_bucket_region}.amazonaws.com/public/raw/${fileName}`,
+        urlResized: `https://${config.aws_user_files_s3_bucket}.s3.${config.aws_user_files_s3_bucket_region}.amazonaws.com/public/resized/${fileName}`,
+        lat: respExifrGps?.latitude,
+        lng: respExifrGps?.longitude,
+        createDate: respExifrParse?.CreateDate.toISOString(),
+        createYear: respExifrParse?.CreateDate?.getFullYear(),
+      });
+      console.log("picture:", picture);
+      await DataStore.save(picture);
     });
     // console.log("respExifrParse:", respExifrParse);
   }, []);
@@ -70,7 +76,7 @@ const DropImage = () => {
         <input {...getInputProps()} />
         <p>ここに</p>
       </div>
-      <AmplifyS3Album path={"uploaded/"} />
+      <AmplifyS3Album path={"/"} />
     </section>
   );
 };

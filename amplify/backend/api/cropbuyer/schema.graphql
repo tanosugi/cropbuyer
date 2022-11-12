@@ -6,8 +6,8 @@ type Picture @model @auth(rules: [{allow: private}]) {
   urlResized: String
   lat: Float
   lng: Float
-  createYear: String
-  createDate: String
+  createYear: Int
+  createDate: AWSDateTime
 }
 
 type Grower @model @auth(rules: [{allow: private}]) {

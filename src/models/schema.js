@@ -55,14 +55,14 @@ export const schema = {
                 "createYear": {
                     "name": "createYear",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
                 "createDate": {
                     "name": "createDate",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -585,5 +585,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "e77c2968d373fdef5a3f4c2d0af4b694"
+    "version": "40fbe106da0d8abf6e9bcd530de838e5"
 };

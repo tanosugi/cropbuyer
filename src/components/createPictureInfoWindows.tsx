@@ -1,8 +1,8 @@
-import config from "aws-exports";
 import { Image } from "@aws-amplify/ui-react";
 import { InfoWindow } from "@react-google-maps/api";
-import { Storage } from "aws-amplify";
+import { DataStore, Storage } from "aws-amplify";
 import exifr from "exifr";
+import { Picture } from "models";
 import { ReactElement, useEffect, useState } from "react";
 
 const CreatePictureInfoWindows = (): ReactElement => {
@@ -42,6 +42,8 @@ const CreatePictureInfoWindows = (): ReactElement => {
   };
   const loadPictures = async () => {
     const listPictures = await Storage.list("uploaded/");
+    const respPictures = await DataStore.query(Picture);
+    console.log("respPictures:", respPictures);
     // console.log("listPictures:", listPictures);
     const retUrls = await Promise.all(
       listPictures.map(async (item) => await Storage.get(item.key || ""))

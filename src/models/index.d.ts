@@ -34,7 +34,7 @@ type EagerPicture = {
   readonly urlResized?: string | null;
   readonly lat?: number | null;
   readonly lng?: number | null;
-  readonly createYear?: string | null;
+  readonly createYear?: number | null;
   readonly createDate?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -48,7 +48,7 @@ type LazyPicture = {
   readonly urlResized?: string | null;
   readonly lat?: number | null;
   readonly lng?: number | null;
-  readonly createYear?: string | null;
+  readonly createYear?: number | null;
   readonly createDate?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
