@@ -16,7 +16,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }): ReactElement => {
     <>
       <NavbarView
         width="100%"
-        margin="0px 0px 20px 0px"
+        margin="0px"
         overrides={{ menu: { onClick: () => setModalToOpen("MenueView") } }}
       />
       <Modal isOpen={modalToOpen == "MenueView"} style={menueModalStyle}>

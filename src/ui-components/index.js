@@ -5,7 +5,9 @@
  **************************************************************************/
 
 export { default as FarmCardViewCollection } from "./FarmCardViewCollection";
+export { default as FarmInfoSwitchView } from "./FarmInfoSwitchView";
 export { default as GrowerCardView } from "./GrowerCardView";
+export { default as MapControlView } from "./MapControlView";
 export { default as EditRecordView } from "./EditRecordView";
 export { default as NavbarView } from "./NavbarView";
 export { default as HeroLayout1 } from "./HeroLayout1";
@@ -18,7 +20,6 @@ export { default as EditFarmView } from "./EditFarmView";
 export { default as CropCardViewCollection } from "./CropCardViewCollection";
 export { default as EditGrowerView } from "./EditGrowerView";
 export { default as RecordCardViewCollection } from "./RecordCardViewCollection";
-export { default as MapControlView } from "./MapControlView";
 export { default as MenueView } from "./MenueView";
 export { default as GrowerCardViewCollection } from "./GrowerCardViewCollection";
 export { default as AddButton } from "./AddButton";

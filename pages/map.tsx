@@ -1,4 +1,4 @@
-import { Authenticator, Grid, View } from "@aws-amplify/ui-react";
+import { Authenticator, Flex, View } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import CreateAutocomplete from "components/createAutocomplete";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { MapControlView } from "ui-components";
 import { addTiltRotateControl } from "utils/addTiltRotateControl";
 const containerStyle = {
-  height: "90vh",
+  height: "100%",
   width: "100%",
 };
 const MyComponent = () => {
@@ -37,10 +37,10 @@ const MyComponent = () => {
   return (
     isLoaded && (
       <Authenticator>
-        <Layout>
-          <MapControlView />
-          <Grid templateColumns="100%" templateRows="100%">
-            <View>
+        <Flex height="100vh" direction="column" gap="0" margin="0">
+          <Layout>
+            <MapControlView />
+            <View grow={1} height="100px">
               <GoogleMap
                 onLoad={mapOnLoad}
                 mapContainerStyle={containerStyle}
@@ -59,8 +59,8 @@ const MyComponent = () => {
                 <CreatePictureInfoWindows />
               </GoogleMap>
             </View>
-          </Grid>
-        </Layout>
+          </Layout>
+        </Flex>
       </Authenticator>
     )
   );

@@ -12,7 +12,7 @@ export default function MapControlView(props) {
   const { overrides, ...rest } = props;
   return (
     <Flex
-      gap="-5px"
+      gap="0"
       direction="column"
       width="unset"
       height="unset"
@@ -24,7 +24,7 @@ export default function MapControlView(props) {
       {...getOverrideProps(overrides, "MapControlView")}
     >
       <Flex
-        gap="0"
+        gap="10px"
         direction="row"
         width="unset"
         height="unset"
@@ -33,7 +33,7 @@ export default function MapControlView(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 210")}
+        {...getOverrideProps(overrides, "FarmInfoSwitchView")}
       >
         <SwitchField
           display="flex"
@@ -45,13 +45,13 @@ export default function MapControlView(props) {
           alignItems="center"
           shrink="0"
           position="relative"
-          padding="8px 8px 8px 8px"
-          label="Farm Info"
-          size="small"
+          padding="0px 4px 0px 4px"
+          label="Farm Info."
+          size="default"
           defaultChecked={true}
           isDisabled={false}
           labelPosition="start"
-          {...getOverrideProps(overrides, "SwitchField35273116")}
+          {...getOverrideProps(overrides, "SwitchField35313346")}
         ></SwitchField>
         <SwitchField
           display="flex"
@@ -63,13 +63,13 @@ export default function MapControlView(props) {
           alignItems="center"
           shrink="0"
           position="relative"
-          padding="8px 8px 8px 8px"
+          padding="0px 4px 0px 4px"
           label="Pictures"
-          size="small"
+          size="default"
           defaultChecked={true}
           isDisabled={false}
           labelPosition="start"
-          {...getOverrideProps(overrides, "SwitchField35273122")}
+          {...getOverrideProps(overrides, "SwitchField35313347")}
         ></SwitchField>
         <SwitchField
           display="flex"
@@ -81,31 +81,32 @@ export default function MapControlView(props) {
           alignItems="center"
           shrink="0"
           position="relative"
-          padding="8px 8px 8px 8px"
+          padding="0px 4px 0px 4px"
           label="Yearly"
-          size="small"
+          size="default"
           defaultChecked={true}
           isDisabled={false}
           labelPosition="start"
-          {...getOverrideProps(overrides, "SwitchField35283174")}
+          {...getOverrideProps(overrides, "SwitchField35313348")}
         ></SwitchField>
       </Flex>
       <SliderField
         display="flex"
-        gap="-15px"
+        gap="0"
         direction="column"
+        width="280px"
         height="unset"
         justifyContent="flex-start"
         alignItems="flex-start"
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        label="Year"
-        defaultValue="50"
-        isDisabled={true}
+        label="Year   "
+        defaultValue="XXXX"
+        isDisabled={false}
         labelHidden={false}
         isValueHidden={false}
-        size="small"
+        size="Default"
         {...getOverrideProps(overrides, "SliderField")}
       ></SliderField>
     </Flex>

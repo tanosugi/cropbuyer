@@ -19,12 +19,13 @@ export default function NavbarView(props) {
       gap="168px"
       direction="row"
       width="320px"
-      height="unset"
+      height="27px"
       justifyContent="space-between"
       alignItems="center"
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(214,245,219,1)"
+      margin="0"
       {...rest}
       {...getOverrideProps(overrides, "NavbarView")}
     >
@@ -32,7 +33,7 @@ export default function NavbarView(props) {
         gap="0"
         direction="row"
         width="unset"
-        height="unset"
+        height="27px"
         justifyContent="flex-start"
         alignItems="center"
         shrink="0"
