@@ -1,18 +1,21 @@
 import { DataStore } from "aws-amplify";
-import { Farm } from "models";
+import { Farm, Record } from "models";
 import { useEffect, useState } from "react";
 
 import { InfoWindow, Marker, Polygon } from "@react-google-maps/api";
 import { FC, ReactElement } from "react";
-import { poligonOptions } from "styles/mapstyles";
+import { poligonOptionsBasic } from "styles/mapstyles";
 import { FarmInfoWindowView } from "ui-components";
 import { polygonStrToCenterLatLng, polygonStrToLatLng } from "utils/maputil";
 
 const CreatePolygons: FC<{
   isShowFarmInfo: boolean;
-}> = ({ isShowFarmInfo }): ReactElement => {
+  isYearly: boolean;
+  yearToShow: number;
+}> = ({ isShowFarmInfo, isYearly, yearToShow }): ReactElement => {
   const [idMouseOvered, setIdMouseOvered] = useState("");
   const [farms, setFarms] = useState<Farm[]>();
+  const [records, setRecords] = useState<Record[]>([]);
   const fetchFarm = async () => {
     const respFarm = await DataStore.query(Farm);
     await console.log("respFarm:", respFarm);
@@ -20,12 +23,35 @@ const CreatePolygons: FC<{
       setFarms(respFarm);
     }
   };
+  // const fetchRecord = async () => {
+  //   const respRecords = await DataStore.query(
+  //     Record,
+  //     isYearly ? (r) => r.year("eq", yearToShow) : Predicates.ALL
+  //   );
+  //   await console.log("respRecords:", respRecords);
+  //   if (respRecords) {
+  //     await setRecords(respRecords);
+  //   }
+  // };
   useEffect(() => {
     fetchFarm();
   }, []);
+  // useEffect(() => {
+  //   fetchRecord();
+  // }, [isYearly, yearToShow]);
+  // useEffect()
   return (
     <>
       {farms?.map((item: Farm) => {
+        // const respRecords = await DataStore.query(Record, (r) =>
+        //   r.year("eq", yearToShow).farmName("eq", item?.name || "")
+        // );
+        const poligonOptions = {
+          fillColor: "orange",
+          fillOpacity: 0.5,
+          strokeColor: "orange",
+          ...poligonOptionsBasic,
+        };
         const paths = polygonStrToLatLng(item?.polygonString || "");
         // console.log("item.name:", item.name);
         const onMouseOver = () => {

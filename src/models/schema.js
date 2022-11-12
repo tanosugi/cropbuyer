@@ -341,6 +341,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "polygonColor": {
+                    "name": "polygonColor",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -585,5 +592,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "40fbe106da0d8abf6e9bcd530de838e5"
+    "version": "5a47e231d668905b7bce95952be43e90"
 };

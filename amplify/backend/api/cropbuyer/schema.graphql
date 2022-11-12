@@ -37,6 +37,7 @@ type Crop @model @auth(rules: [{allow: private}]) {
   name: String
   image_url: String
   description: String
+  polygonColor: String
 }
 
 type Record @model @auth(rules: [{allow: private}]) {

@@ -103,7 +103,11 @@ const MyComponent = () => {
                   polygons={polygons}
                   setPolygons={setPolygons}
                 />
-                <CreatePolygons isShowFarmInfo={isShowFarmInfo} />
+                <CreatePolygons
+                  isShowFarmInfo={isShowFarmInfo}
+                  isYearly={isYearly}
+                  yearToShow={yearToShow}
+                />
                 {isShowPictures && (
                   <CreatePictureInfoWindows
                     isYearly={isYearly}

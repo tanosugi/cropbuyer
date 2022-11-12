@@ -16,9 +16,7 @@ import FarmCardView from "./FarmCardView";
 import { Collection } from "@aws-amplify/ui-react";
 export default function FarmCardViewCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
-  const itemsPagination = {
-    sort: (s) => s.updatedAt(SortDirection.DESCENDING),
-  };
+  const itemsPagination = { sort: (s) => s.updatedAt(SortDirection.ASCENDING) };
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Farm,

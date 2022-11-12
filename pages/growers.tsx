@@ -41,6 +41,7 @@ const Growers = () => {
                   onClick: () => {
                     setModalToOpen("EditGrowerView");
                     setGrowerToEdit(item);
+                    console.log("EditGrowerView");
                   },
                 },
               },

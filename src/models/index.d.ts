@@ -129,6 +129,7 @@ type EagerCrop = {
   readonly name?: string | null;
   readonly image_url?: string | null;
   readonly description?: string | null;
+  readonly polygonColor?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -138,6 +139,7 @@ type LazyCrop = {
   readonly name?: string | null;
   readonly image_url?: string | null;
   readonly description?: string | null;
+  readonly polygonColor?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
