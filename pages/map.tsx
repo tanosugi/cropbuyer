@@ -58,21 +58,21 @@ const MyComponent = () => {
                     event: React.ChangeEventHandler<HTMLInputElement>
                   ) => {
                     setIsShowFarmInfo(!isShowFarmInfo);
-                    console.log("isShowFarmInfo:", isShowFarmInfo);
+                    // console.log("isShowFarmInfo:", isShowFarmInfo);
                   },
                 },
                 SwitchField35313347: {
                   value: isShowPictures,
                   onChange: (e: React.ChangeEventHandler<HTMLInputElement>) => {
                     setIsShowPictures(!isShowPictures);
-                    console.log("isShowPictures:", isShowPictures);
+                    // console.log("isShowPictures:", isShowPictures);
                   },
                 },
                 SwitchField35313348: {
                   value: isYearly,
                   onChange: (e: React.ChangeEventHandler<HTMLInputElement>) => {
                     setIsYearly(!isYearly);
-                    console.log("isYearly:", isYearly);
+                    // console.log("isYearly:", isYearly);
                   },
                 },
                 SliderField: {

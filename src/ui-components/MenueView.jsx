@@ -9,18 +9,10 @@ import * as React from "react";
 import {
   getOverrideProps,
   useAuthSignOutAction,
-  useNavigateAction,
 } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Icon, View } from "@aws-amplify/ui-react";
 export default function MenueView(props) {
   const { grower, overrides, ...rest } = props;
-  const frameThreeEightOnClick = useNavigateAction({ type: "url", url: "/" });
-  const frameThreeNineOnClick = useNavigateAction({ type: "url", url: "/map" });
-  const frameFourZeroOnClick = useNavigateAction({
-    type: "url",
-    url: "/growers",
-  });
-  const frameFourOneOnClick = useNavigateAction({ type: "url", url: "/crops" });
   const frameFourTwoOnClick = useAuthSignOutAction({ global: false });
   return (
     <Flex
@@ -46,8 +38,54 @@ export default function MenueView(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 43")}
+        {...getOverrideProps(overrides, "Frame 4334743079")}
       >
+        <Flex
+          gap="10px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="flex-end"
+          alignItems="center"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 56")}
+        >
+          <Flex
+            gap="10px"
+            direction="row"
+            width="unset"
+            height="unset"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            shrink="0"
+            position="relative"
+            padding="2px 2px 2px 2px"
+            {...getOverrideProps(overrides, "close-circle")}
+          >
+            <Icon
+              width="20px"
+              height="20px"
+              viewBox={{ minX: 0, minY: 0, width: 20, height: 20 }}
+              paths={[
+                {
+                  d: "M10 0C15.53 0 20 4.47 20 10C20 15.53 15.53 20 10 20C4.47 20 0 15.53 0 10C0 4.47 4.47 0 10 0ZM13.59 5L10 8.59L6.41 5L5 6.41L8.59 10L5 13.59L6.41 15L10 11.41L13.59 15L15 13.59L11.41 10L15 6.41L13.59 5Z",
+                  fill: "rgba(0,0,0,1)",
+                  fillRule: "nonzero",
+                },
+              ]}
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              shrink="0"
+              position="relative"
+              {...getOverrideProps(overrides, "Vector35393166")}
+            ></Icon>
+          </Flex>
+        </Flex>
         <Flex
           gap="12px"
           direction="row"
@@ -58,9 +96,6 @@ export default function MenueView(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          onClick={() => {
-            frameThreeEightOnClick();
-          }}
           {...getOverrideProps(overrides, "Frame 38")}
         >
           <View
@@ -126,9 +161,6 @@ export default function MenueView(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          onClick={() => {
-            frameThreeNineOnClick();
-          }}
           {...getOverrideProps(overrides, "Frame 39")}
         >
           <View
@@ -194,9 +226,6 @@ export default function MenueView(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          onClick={() => {
-            frameFourZeroOnClick();
-          }}
           {...getOverrideProps(overrides, "Frame 40")}
         >
           <View
@@ -262,9 +291,6 @@ export default function MenueView(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          onClick={() => {
-            frameFourOneOnClick();
-          }}
           {...getOverrideProps(overrides, "Frame 41")}
         >
           <View
@@ -318,6 +344,71 @@ export default function MenueView(props) {
             variation="link"
             children="Crops"
             {...getOverrideProps(overrides, "Button34743050")}
+          ></Button>
+        </Flex>
+        <Flex
+          gap="12px"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="flex-start"
+          alignItems="center"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          {...getOverrideProps(overrides, "Frame 4335393153")}
+        >
+          <View
+            width="24px"
+            height="24px"
+            display="block"
+            gap="unset"
+            alignItems="unset"
+            justifyContent="unset"
+            overflow="hidden"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            {...getOverrideProps(overrides, "image")}
+          >
+            <Icon
+              width="18px"
+              height="18px"
+              viewBox={{ minX: 0, minY: 0, width: 18, height: 18 }}
+              paths={[
+                {
+                  d: "M5.5 10.5L8 13.5L11.5 9L16 15L2 15M18 16L18 2C18 0.89 17.1 0 16 0L2 0C1.46957 4.44089e-16 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 4.44089e-16 1.46957 0 2L0 16C4.44089e-16 16.5304 0.210714 17.0391 0.585786 17.4142C0.960859 17.7893 1.46957 18 2 18L16 18C16.5304 18 17.0391 17.7893 17.4142 17.4142C17.7893 17.0391 18 16.5304 18 16Z",
+                  fill: "rgba(0,0,0,1)",
+                  fillRule: "nonzero",
+                },
+              ]}
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              position="absolute"
+              top="12.5%"
+              bottom="12.5%"
+              left="12.5%"
+              right="12.5%"
+              {...getOverrideProps(overrides, "Vector35393163")}
+            ></Icon>
+          </View>
+          <Button
+            display="flex"
+            direction="row"
+            width="unset"
+            height="unset"
+            justifyContent="center"
+            alignItems="center"
+            shrink="0"
+            position="relative"
+            padding="8px 16px 8px 16px"
+            size="large"
+            isDisabled={false}
+            variation="link"
+            children="Add Images"
+            {...getOverrideProps(overrides, "Button35393156")}
           ></Button>
         </Flex>
         <Flex

@@ -24,7 +24,7 @@ const CreateAutocomplete: FC<{
     <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
       <input
         type="text"
-        placeholder="Customized your placeholder"
+        placeholder="Search Place to Jump"
         style={autocompleteStyle}
       />
     </Autocomplete>

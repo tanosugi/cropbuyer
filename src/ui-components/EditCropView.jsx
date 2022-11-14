@@ -10,7 +10,6 @@ import {
   getOverrideProps,
   useDataStoreCreateAction,
   useDataStoreUpdateAction,
-  useNavigateAction,
   useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
 import { Crop } from "../models";
@@ -38,7 +37,6 @@ export default function EditCropView(props) {
   ] = useStateMutationAction("");
   const [textAreaFieldValue, setTextAreaFieldValue] =
     useStateMutationAction("");
-  const iconOnClick = useNavigateAction({ type: "url", url: "crops" });
   const buttonThreeFourSevenZeroFourFiveFourFiveOnClick =
     useDataStoreCreateAction({
       fields: {
@@ -159,9 +157,7 @@ export default function EditCropView(props) {
             right="0px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(255,255,255,1)"
-            onClick={() => {
-              iconOnClick();
-            }}
+            className="custom-btn"
             {...getOverrideProps(overrides, "Icon")}
           >
             <Icon
@@ -267,6 +263,26 @@ export default function EditCropView(props) {
               );
             }}
             {...getOverrideProps(overrides, "TextField34704539")}
+          ></TextField>
+          <TextField
+            display="flex"
+            gap="8px"
+            direction="column"
+            width="unset"
+            height="unset"
+            justifyContent="center"
+            alignItems="flex-start"
+            shrink="0"
+            alignSelf="stretch"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            label="Polygon Color"
+            placeholder="blue, black, etc."
+            size="default"
+            isDisabled={false}
+            labelHidden={false}
+            variation="default"
+            {...getOverrideProps(overrides, "TextField35403167")}
           ></TextField>
           <TextAreaField
             display="flex"

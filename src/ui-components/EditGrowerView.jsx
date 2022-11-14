@@ -10,7 +10,6 @@ import {
   getOverrideProps,
   useDataStoreCreateAction,
   useDataStoreUpdateAction,
-  useNavigateAction,
   useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
 import { Grower } from "../models";
@@ -50,7 +49,6 @@ export default function EditGrowerView(props) {
     textFieldThreeFourEightNineThreeOneOneZeroValue,
     setTextFieldThreeFourEightNineThreeOneOneZeroValue,
   ] = useStateMutationAction("");
-  const iconOnClick = useNavigateAction({ type: "url", url: "growers" });
   const buttonThreeFourSixEightTwoSevenThreeFourOnClick =
     useDataStoreCreateAction({
       fields: {
@@ -201,9 +199,7 @@ export default function EditGrowerView(props) {
             right="0px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(255,255,255,1)"
-            onClick={() => {
-              iconOnClick();
-            }}
+            className="custom-btn"
             {...getOverrideProps(overrides, "Icon")}
           >
             <Icon

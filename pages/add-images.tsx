@@ -1,9 +1,10 @@
 import { Storage } from "@aws-amplify/storage";
 import { Authenticator } from "@aws-amplify/ui-react";
-import { AmplifyS3Album } from "@aws-amplify/ui-react/legacy";
+import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
 import { DataStore } from "aws-amplify";
 import config from "aws-exports";
 import exifr from "exifr";
+import useDataStoreQuery from "hooks/useDataStoreQuery";
 import Layout from "layout/layout";
 import { Picture } from "models";
 import { useCallback } from "react";
@@ -12,7 +13,9 @@ import Resizer from "react-image-file-resizer";
 import { dropzoneActive, dropzoneStyles } from "styles/dropzoneStyles";
 import { dataURIToBlob } from "utils/dataURIToBlob";
 
-const DropImage = () => {
+const AddImages = () => {
+  const { data: pictures, isLoading, error } = useDataStoreQuery(Picture);
+  console.log("pictures:", pictures);
   const uploadImage = async (file: FileWithPath, fileName: string) => {
     const result = await Storage.put(fileName, file);
     // console.log("result:", result);
@@ -80,7 +83,10 @@ const DropImage = () => {
             <input {...getInputProps()} />
             <p>Drag & Drop Picture or Click Here to Upload</p>
           </div>
-          <AmplifyS3Album path={"resized/"} picker={false} />
+          {/* <AmplifyS3Album path={"resized/"} picker={false} /> */}
+          {pictures?.map((picture) => (
+            <AmplifyS3Image imgKey={picture?.s3KeyRaw || ""} />
+          ))}
         </section>
       </Layout>
     </Authenticator>
@@ -103,4 +109,4 @@ const resizeFile = (file: File) =>
     );
   });
 
-export default DropImage;
+export default AddImages;

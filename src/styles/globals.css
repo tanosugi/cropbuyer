@@ -11,3 +11,11 @@ a {
 
 
 
+.custom-btn:hover {
+  transform: scale(1.1);
+  opacity:0.8;
+  cursor: pointer;
+}
+.custom-btn:active {
+  transform: scale(1);
+}

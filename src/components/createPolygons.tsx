@@ -1,9 +1,9 @@
-import { DataStore } from "aws-amplify";
-import { Farm, Record } from "models";
-import { useEffect, useState } from "react";
-
 import { InfoWindow, Marker, Polygon } from "@react-google-maps/api";
-import { FC, ReactElement } from "react";
+import {
+  FarmAndRecord,
+  useQueryFarmAndRecordArray,
+} from "hooks/useQueryFarmAndRecordArray";
+import { FC, ReactElement, useState } from "react";
 import { poligonOptionsBasic } from "styles/mapstyles";
 import { FarmInfoWindowView } from "ui-components";
 import { polygonStrToCenterLatLng, polygonStrToLatLng } from "utils/maputil";
@@ -14,76 +14,82 @@ const CreatePolygons: FC<{
   yearToShow: number;
 }> = ({ isShowFarmInfo, isYearly, yearToShow }): ReactElement => {
   const [idMouseOvered, setIdMouseOvered] = useState("");
-  const [farms, setFarms] = useState<Farm[]>();
-  const [records, setRecords] = useState<Record[]>([]);
-  const fetchFarm = async () => {
-    const respFarm = await DataStore.query(Farm);
-    await console.log("respFarm:", respFarm);
-    if (respFarm) {
-      setFarms(respFarm);
-    }
-  };
-  // const fetchRecord = async () => {
-  //   const respRecords = await DataStore.query(
-  //     Record,
-  //     isYearly ? (r) => r.year("eq", yearToShow) : Predicates.ALL
-  //   );
-  //   await console.log("respRecords:", respRecords);
-  //   if (respRecords) {
-  //     await setRecords(respRecords);
-  //   }
-  // };
-  useEffect(() => {
-    fetchFarm();
-  }, []);
-  // useEffect(() => {
-  //   fetchRecord();
-  // }, [isYearly, yearToShow]);
-  // useEffect()
+  const { farmAndRecordArray, dictCrops } = useQueryFarmAndRecordArray(
+    isYearly,
+    yearToShow
+  );
+  // console.log("farmAndRecordArray:", farmAndRecordArray);
+  // console.log("dictCrops:", dictCrops);
   return (
     <>
-      {farms?.map((item: Farm) => {
-        // const respRecords = await DataStore.query(Record, (r) =>
-        //   r.year("eq", yearToShow).farmName("eq", item?.name || "")
-        // );
-        const poligonOptions = {
-          fillColor: "orange",
-          fillOpacity: 0.5,
-          strokeColor: "orange",
-          ...poligonOptionsBasic,
-        };
-        const paths = polygonStrToLatLng(item?.polygonString || "");
-        // console.log("item.name:", item.name);
-        const onMouseOver = () => {
-          setIdMouseOvered(item.id);
-        };
-        return (
-          <>
-            <Polygon
-              draggable={true}
-              editable={true}
-              key={`${item?.polygonString}-Polygon`}
-              paths={paths}
-              options={poligonOptions}
-            />
-            {(item.id == idMouseOvered || isShowFarmInfo) && (
-              <InfoWindow
-                // key={`${item?.polygonString}-InfoWindow`}
-                position={polygonStrToCenterLatLng(item?.polygonString || "")}
-              >
-                <FarmInfoWindowView farm={item} />
-              </InfoWindow>
-            )}
-            <Marker
-              // key={`${item?.polygonString}-Marker`}
-              position={polygonStrToCenterLatLng(item?.polygonString || "")}
-              onMouseOver={() => setIdMouseOvered(item.id)}
-              onClick={() => setIdMouseOvered(item.id)}
-              opacity={0.1}
-            />
-          </>
-        );
-      })}
+      {farmAndRecordArray &&
+        farmAndRecordArray?.map((farmAndRecord: FarmAndRecord) => {
+          // console.log("dictCrops:", dictCrops);
+          const farm = farmAndRecord.farm;
+          // console.log("farm?.name,record:", farm?.name, record);
+          console.log(
+            "farmAndRecord?.record?.cropName,dictCrops:",
+            farmAndRecord?.record?.cropName,
+            dictCrops
+          );
+          let color;
+          if (
+            farmAndRecord?.record?.cropName &&
+            dictCrops &&
+            farmAndRecord?.record?.cropName in dictCrops
+          ) {
+            color = dictCrops[farmAndRecord?.record?.cropName] || "pink";
+          } else {
+            // color = "red";
+          }
+          let opacity = 0;
+          if (isYearly) {
+            opacity = Math.min(
+              5,
+              farmAndRecord?.record?.statusRating || opacity
+            );
+          } else {
+            opacity = Math.min(5, farm.latestStatus || opacity);
+          }
+          console.log("color:", color);
+          const poligonOptions = {
+            fillColor: color,
+            fillOpacity: opacity * 0.1,
+            strokeColor: color,
+            ...poligonOptionsBasic,
+          };
+          const paths = polygonStrToLatLng(farm?.polygonString || "");
+          // console.log("farm.name:", farm.name);
+          const onMouseOver = () => {
+            setIdMouseOvered(farm.id);
+          };
+          return (
+            <>
+              <Polygon
+                draggable={true}
+                editable={true}
+                key={`${farm?.polygonString}-Polygon`}
+                paths={paths}
+                options={poligonOptions}
+              />
+              {(farm.id == idMouseOvered || isShowFarmInfo) && (
+                <InfoWindow
+                  // key={`${farm?.polygonString}-InfoWindow`}
+                  position={polygonStrToCenterLatLng(farm?.polygonString || "")}
+                >
+                  <FarmInfoWindowView farm={farm} />
+                </InfoWindow>
+              )}
+              <Marker
+                // key={`${farm?.polygonString}-Marker`}
+                position={polygonStrToCenterLatLng(farm?.polygonString || "")}
+                onMouseOver={() => setIdMouseOvered(farm.id)}
+                onClick={() => setIdMouseOvered(farm.id)}
+                opacity={0.1}
+              />
+            </>
+          );
+        })}
     </>
   );
 };

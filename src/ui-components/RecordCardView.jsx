@@ -308,6 +308,7 @@ export default function RecordCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             onClick={() => {
               frameEightOnClick();
             }}
@@ -382,6 +383,7 @@ export default function RecordCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             {...getOverrideProps(overrides, "Frame 7")}
           >
             <View

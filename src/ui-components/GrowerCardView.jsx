@@ -16,10 +16,6 @@ import { schema } from "../models/schema";
 import { Flex, Icon, Image, Text, View } from "@aws-amplify/ui-react";
 export default function GrowerCardView(props) {
   const { grower, overrides, ...rest } = props;
-  const frameThreeTwoOnClick = useNavigateAction({
-    type: "url",
-    url: `${"farm-list/"}${grower?.id}`,
-  });
   const frameOneZeroOnClick = useNavigateAction({
     type: "url",
     url: `${"mailto:"}${grower?.email}`,
@@ -139,77 +135,6 @@ export default function GrowerCardView(props) {
           <Flex
             gap="0"
             direction="column"
-            width="33px"
-            height="unset"
-            justifyContent="flex-start"
-            alignItems="center"
-            shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 31")}
-          >
-            <View
-              width="24px"
-              height="24px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              overflow="hidden"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "account-arrow-up")}
-            >
-              <Icon
-                width="18px"
-                height="17px"
-                viewBox={{ minX: 0, minY: 0, width: 18, height: 17 }}
-                paths={[
-                  {
-                    d: "M14 13L14 17L16 17L16 13L18 13L15 10L12 13L14 13ZM8 0C5.8 0 4 1.8 4 4C4 6.2 5.8 8 8 8C10.2 8 12 6.2 12 4C12 1.8 10.2 0 8 0ZM8 10C3.6 10 0 11.8 0 14L0 16L9.5 16C9.2 15.2 9 14.4 9 13.5C9 12.3 9.3 11.2 9.9 10.1C9.3 10.1 8.7 10 8 10Z",
-                    fill: "rgba(0,0,0,1)",
-                    fillRule: "nonzero",
-                  },
-                ]}
-                display="block"
-                gap="unset"
-                alignItems="unset"
-                justifyContent="unset"
-                position="absolute"
-                top="16.67%"
-                bottom="12.5%"
-                left="12.5%"
-                right="12.5%"
-                {...getOverrideProps(overrides, "Vector34793085")}
-              ></Icon>
-            </View>
-            <Text
-              fontFamily="Inter"
-              fontSize="6px"
-              fontWeight="400"
-              color="rgba(0,0,0,1)"
-              lineHeight="6px"
-              textAlign="center"
-              display="block"
-              direction="column"
-              justifyContent="unset"
-              letterSpacing="0px"
-              width="33px"
-              height="unset"
-              gap="unset"
-              alignItems="unset"
-              shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              whiteSpace="pre-wrap"
-              children="upload&#xA;image"
-              {...getOverrideProps(overrides, "upload image")}
-            ></Text>
-          </Flex>
-          <Flex
-            gap="0"
-            direction="column"
             width="24px"
             height="unset"
             justifyContent="flex-start"
@@ -217,9 +142,7 @@ export default function GrowerCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            onClick={() => {
-              frameThreeTwoOnClick();
-            }}
+            className="custom-btn"
             {...getOverrideProps(overrides, "Frame 32")}
           >
             <View
@@ -291,6 +214,7 @@ export default function GrowerCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             onClick={() => {
               frameOneZeroOnClick();
             }}
@@ -365,6 +289,7 @@ export default function GrowerCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             onClick={() => {
               frameNineOnClick();
             }}
@@ -439,6 +364,7 @@ export default function GrowerCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             onClick={() => {
               frameEightOnClick();
             }}
@@ -513,6 +439,7 @@ export default function GrowerCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             {...getOverrideProps(overrides, "Frame 7")}
           >
             <View

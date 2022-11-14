@@ -16,25 +16,27 @@ const CreatePictureInfoWindows: FC<{
       Picture,
       isYearly ? (p) => p.createYear("eq", yearToShow) : Predicates.ALL
     );
-    await console.log("respPictures:", respPictures);
+    // await console.log("respPictures:", respPictures);
     // console.log("listPictures:", listPictures);
     await setPictures(respPictures);
   };
   useEffect(() => {
     // get the users current location on intial login
     loadPictures();
-    console.log("yearToShow:", yearToShow);
+    const subscription = DataStore.observe(Picture).subscribe(loadPictures);
+    return () => subscription.unsubscribe();
+    // console.log("yearToShow:", yearToShow);
   }, [isYearly, yearToShow]);
   return (
     <>
       {pictures &&
         pictures.map((picture: Picture) => {
           // console.log("picture.s3KeyResized:", picture.s3KeyResized);
-          console.log(
-            "!isYearly || yearToShow == picture?.createYear:",
-            picture?.s3KeyRaw,
-            !isYearly || yearToShow == picture?.createYear
-          );
+          // console.log(
+          //   "!isYearly || yearToShow == picture?.createYear:",
+          //   picture?.s3KeyRaw,
+          //   !isYearly || yearToShow == picture?.createYear
+          // );
           return !isYearly || yearToShow == picture?.createYear ? (
             <InfoWindow
               key={picture.s3KeyResized}

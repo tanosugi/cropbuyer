@@ -27,3 +27,4 @@ export { default as RecordCardView } from "./RecordCardView";
 export { default as FarmCardView } from "./FarmCardView";
 export { default as FarmDetailView } from "./FarmDetailView";
 export { default as studioTheme } from "./studioTheme";
+export { default as NewForm1 } from "./NewForm1";

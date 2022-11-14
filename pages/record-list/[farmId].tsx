@@ -1,5 +1,5 @@
 import { Authenticator } from "@aws-amplify/ui-react";
-import { DataStore } from "aws-amplify";
+import { DataStore, Hub } from "aws-amplify";
 import Center from "layout/center";
 import Layout from "layout/layout";
 import { Farm, Record } from "models";
@@ -20,6 +20,16 @@ const RecordList = () => {
   const [modalToOpen, setModalToOpen] = useState("");
   const [recordToEdit, setRecordToEdit] = useState();
   const router = useRouter();
+  useEffect(() => {
+    Hub.listen("ui", ({ payload }) => {
+      if (
+        payload.event === "actions:datastore:create:finished" ||
+        payload.event === "actions:datastore:update:finished"
+      ) {
+        setModalToOpen("");
+      }
+    });
+  }, []);
   const { farmId } = router.query;
   const fetchFarm = async () => {
     const respFarm = await DataStore.query(Farm, String(farmId));
@@ -52,54 +62,67 @@ const RecordList = () => {
   return (
     <Authenticator>
       <Layout>
-        <div>RecordList {farmId}</div>
-        {farm && <FarmDetailView farm={farm} />}
-        <AddButton
-          overrides={{
-            AddButton: {
-              onClick: () => setModalToOpen("AddRecordView"),
-            },
-          }}
-        />
-        <Modal isOpen={modalToOpen == "AddRecordView"} style={modalStyle}>
-          <Center>
-            <EditRecordView
-              record={new Record({ farmName: farm?.name })}
+        <Center>
+          {farm && (
+            <FarmDetailView
+              farm={farm}
               overrides={{
-                "Edit Record": { children: "Create Crop" },
-                Button34704601: { isDisabled: true },
+                "close-circle": { onClick: () => router.push("/growers") },
               }}
             />
-          </Center>
-        </Modal>
-        {records && (
-          <>
-            <RecordCardViewCollection
-              items={records}
-              overrideItems={({ item, index }) => ({
-                overrides: {
-                  "Frame 7": {
-                    onClick: () => {
-                      setModalToOpen("EditRecordView");
-                      setRecordToEdit(item);
+          )}
+          <AddButton
+            overrides={{
+              AddButton: {
+                onClick: () => setModalToOpen("AddRecordView"),
+              },
+            }}
+          />
+          <Modal isOpen={modalToOpen == "AddRecordView"} style={modalStyle}>
+            <Center>
+              <EditRecordView
+                record={new Record({ farmName: farm?.name })}
+                overrides={{
+                  "Edit Record": { children: "Create Crop" },
+                  Button34704601: { isDisabled: true },
+                  Icon: { onClick: () => setModalToOpen("") },
+                }}
+              />
+            </Center>
+          </Modal>
+          {records && (
+            <>
+              <RecordCardViewCollection
+                items={records}
+                overrideItems={({ item, index }) => ({
+                  overrides: {
+                    "Frame 7": {
+                      onClick: () => {
+                        setModalToOpen("EditRecordView");
+                        setRecordToEdit(item);
+                      },
                     },
                   },
-                },
-              })}
-            />
+                })}
+              />
 
-            <Modal isOpen={modalToOpen == "EditRecordView"} style={modalStyle}>
-              <Center>
-                <EditRecordView
-                  record={recordToEdit}
-                  overrides={{
-                    Button34704600: { isDisabled: true },
-                  }}
-                />
-              </Center>
-            </Modal>
-          </>
-        )}
+              <Modal
+                isOpen={modalToOpen == "EditRecordView"}
+                style={modalStyle}
+              >
+                <Center>
+                  <EditRecordView
+                    record={recordToEdit}
+                    overrides={{
+                      Button34704600: { isDisabled: true },
+                      Icon: { onClick: () => setModalToOpen("") },
+                    }}
+                  />
+                </Center>
+              </Modal>
+            </>
+          )}
+        </Center>
       </Layout>
     </Authenticator>
   );

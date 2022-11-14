@@ -9,17 +9,12 @@ import * as React from "react";
 import {
   getOverrideProps,
   useDataStoreDeleteAction,
-  useNavigateAction,
 } from "@aws-amplify/ui-react/internal";
 import { Farm } from "../models";
 import { schema } from "../models/schema";
 import { Flex, Icon, Rating, Text, View } from "@aws-amplify/ui-react";
 export default function FarmCardView(props) {
   const { farm, rectangle1, overrides, ...rest } = props;
-  const frameTwoFiveOnClick = useNavigateAction({
-    type: "url",
-    url: `${"../record-list/"}${farm?.id}`,
-  });
   const frameEightOnClick = useDataStoreDeleteAction({
     id: farm?.id,
     model: Farm,
@@ -220,6 +215,7 @@ export default function FarmCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             {...getOverrideProps(overrides, "Frame 35")}
           >
             <View
@@ -291,9 +287,7 @@ export default function FarmCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            onClick={() => {
-              frameTwoFiveOnClick();
-            }}
+            className="custom-btn"
             {...getOverrideProps(overrides, "Frame 25")}
           >
             <Icon
@@ -348,6 +342,7 @@ export default function FarmCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             onClick={() => {
               frameEightOnClick();
             }}
@@ -422,6 +417,7 @@ export default function FarmCardView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
+            className="custom-btn"
             {...getOverrideProps(overrides, "Frame 36")}
           >
             <View

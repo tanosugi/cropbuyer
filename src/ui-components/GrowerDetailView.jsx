@@ -6,17 +6,10 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  getOverrideProps,
-  useNavigateAction,
-} from "@aws-amplify/ui-react/internal";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Flex, Icon, Image, Text } from "@aws-amplify/ui-react";
 export default function GrowerDetailView(props) {
   const { grower, overrides, ...rest } = props;
-  const closecircleOnClick = useNavigateAction({
-    type: "url",
-    url: `${"."}${"."}${"/"}${"growers"}`,
-  });
   return (
     <Flex
       gap="0"
@@ -52,9 +45,7 @@ export default function GrowerDetailView(props) {
           shrink="0"
           position="relative"
           padding="2px 2px 2px 2px"
-          onClick={() => {
-            closecircleOnClick();
-          }}
+          className="custom-btn"
           {...getOverrideProps(overrides, "close-circle")}
         >
           <Icon

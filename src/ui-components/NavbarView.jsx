@@ -119,6 +119,7 @@ export default function NavbarView(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
+        className="custom-btn"
         {...getOverrideProps(overrides, "menu")}
       >
         <Icon

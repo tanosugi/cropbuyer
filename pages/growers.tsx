@@ -1,7 +1,9 @@
 import { Authenticator } from "@aws-amplify/ui-react";
+import { Hub } from "aws-amplify";
 import Center from "layout/center";
 import Layout from "layout/layout";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { modalStyle } from "styles/modalStyle";
 import {
@@ -13,6 +15,17 @@ import {
 const Growers = () => {
   const [modalToOpen, setModalToOpen] = useState("");
   const [growerToEdit, setGrowerToEdit] = useState();
+  const router = useRouter();
+  useEffect(() => {
+    Hub.listen("ui", ({ payload }) => {
+      if (
+        payload.event === "actions:datastore:create:finished" ||
+        payload.event === "actions:datastore:update:finished"
+      ) {
+        setModalToOpen("");
+      }
+    });
+  }, []);
   return (
     <Authenticator>
       <Layout>
@@ -30,6 +43,7 @@ const Growers = () => {
                 overrides={{
                   "Edit Grower": { children: "Create Grower" },
                   Button34682738: { isDisabled: true },
+                  Icon: { onClick: () => setModalToOpen("") },
                 }}
               />
             </Center>
@@ -44,6 +58,15 @@ const Growers = () => {
                     console.log("EditGrowerView");
                   },
                 },
+                "Frame 32": {
+                  onClick: () => {
+                    router.push(`/farm-list/${item.id}`);
+                    console.log(
+                      "`/farm-list/${item.id}`:",
+                      `/farm-list/${item.id}`
+                    );
+                  },
+                },
               },
             })}
           />
@@ -53,6 +76,7 @@ const Growers = () => {
                 grower={growerToEdit}
                 overrides={{
                   Button34682734: { isDisabled: true },
+                  Icon: { onClick: () => setModalToOpen("") },
                 }}
               />
             </Center>

@@ -10,7 +10,6 @@ import {
   getOverrideProps,
   useDataStoreCreateAction,
   useDataStoreUpdateAction,
-  useNavigateAction,
   useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
 import { Record } from "../models";
@@ -58,7 +57,6 @@ export default function EditRecordView(props) {
   ] = useStateMutationAction("");
   const [textAreaFieldValue, setTextAreaFieldValue] =
     useStateMutationAction("");
-  const iconOnClick = useNavigateAction({ type: "reload" });
   const buttonThreeFourSevenZeroFourSixZeroZeroOnClick =
     useDataStoreCreateAction({
       fields: {
@@ -229,9 +227,7 @@ export default function EditRecordView(props) {
             right="0px"
             padding="0px 0px 0px 0px"
             backgroundColor="rgba(255,255,255,1)"
-            onClick={() => {
-              iconOnClick();
-            }}
+            className="custom-btn"
             {...getOverrideProps(overrides, "Icon")}
           >
             <Icon

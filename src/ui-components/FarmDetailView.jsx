@@ -45,6 +45,7 @@ export default function FarmDetailView(props) {
           shrink="0"
           position="relative"
           padding="2px 2px 2px 2px"
+          className="custom-btn"
           {...getOverrideProps(overrides, "close-circle")}
         >
           <Icon

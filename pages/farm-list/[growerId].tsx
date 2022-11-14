@@ -14,6 +14,7 @@ import {
 } from "utils/maputil";
 
 const FarmList = () => {
+  const [modalToOpen, setModalToOpen] = useState("");
   const [grower, setGrower] = useState<Grower>();
   const [farms, setFarms] = useState<Farm[]>();
   const router = useRouter();
@@ -49,11 +50,26 @@ const FarmList = () => {
     <Authenticator>
       <Layout>
         <Center>
-          {grower && <GrowerDetailView grower={grower} />}
+          {grower && (
+            <GrowerDetailView
+              grower={grower}
+              overrides={{
+                "close-circle": { onClick: () => router.push("/growers") },
+              }}
+            />
+          )}
           {farms && (
             <FarmCardViewCollection
               items={farms}
               overrideItems={({ item, index }) => ({
+                overrides: {
+                  "Frame 36": {
+                    onClick: () => setModalToOpen("EditFarmView"),
+                  },
+                  "Frame 25": {
+                    onClick: () => router.push(`/record-list/${item.id}`),
+                  },
+                },
                 rectangle1: isLoaded && (
                   <>
                     <GoogleMap
