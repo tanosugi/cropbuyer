@@ -1,3 +1,8 @@
+# Crop Buyer
+
+We developed the web app for buyers of crops (agricultural products).
+Users can plot farms as polygons with names, descriptions and status, upload pictures with GPS data, and see them on the map.
+
 # Inspiration
 
 ## Target User
@@ -53,7 +58,6 @@ Filled with light yellow (or blue): Status is bad
 
 You can move slider control and change the year, and you can see that soy bean (green color) were grown in 2017, 18, changed to rice (yellow color) after 2019, only rice was grown on 2022
 
-
 soy bean (green color) were grown in 2017
 ![soybean2017.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435832484/wALxY0E5R.png)
 
@@ -100,6 +104,28 @@ Then, you can visit [Record List Page](https://crop-buyer.tanosugi.com/record-li
 
 I build front end with React, Nextjs.
 To use Google Maps JavaScript API v3 with React, I utilize [@react-google-maps/api](https://github.com/JustFly1984/react-google-maps-api) ([how to use](https://react-google-maps-api-docs.netlify.app/])
+
+## How did you use Google Maps Platform within your project?
+
+#### Polygon:
+   1. on map page, I show farms as polygon
+   2. on farm-list page where you can access from grower page -> farm list button of each grower,
+  I show farm's shape on the map as polygon.
+
+#### InfoWindow:
+  1. on map page, I show Pictures in Info WIndow
+  2. on map page, I show Information of each farms in Info WIndow 
+
+#### Drawing Manager:
+
+- I use it to add new Farm shape as Polygon
+
+#### Tilt and Rotate:
+- I use vector map and put tilt and rotate button as document show the example.
+
+#### Autocomplete:
+-   I put it at the top of the map to jump to any location
+
 
 ## Vector Map, Tilt and Rotate Button
 
@@ -373,3 +399,13 @@ It is often said that development takes 3 to 5 times longer than expected, so th
 ## What's next for a
 
 At first, I wanted to make a travel app based on the sample app which show airplane flying animation, but I gave up because the React library was not yet available and I could not find good sample code. I think the code submitted by other teams in this hackathon will give me an idea of how to achieve this, so next time I would like to make a travel app with animation.
+
+
+## About Me
+My pen name is Tanosugi I am from Japan and living in Japan. I worked part-time using Visual C++ when I was a student long years ago, but now I have a non-engineering job. 2-3 years ago, I read a book published in Japan, "Let's start development by yourself!" and wanted to practice it, so I resumed coding as a hobby. After studying React, Django, AWS, etc. at Udemy, I have been making various web services by myself. Some of the services are for my kids.
+
+## Conclusion
+
+I coded on weekday after the kids went to bed and holiday, so that's a total of 30-40 hours in 10 days, including article writing, taking video. If it is an intensive hackathon, it takes 2-3 days.
+
+I was able to create the application which I imaged, and I was able to confirm the usefulness of Google map API, so it was a very meaningful time for me.
