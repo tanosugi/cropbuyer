@@ -1,7 +1,15 @@
 import { DrawingManager, Polygon } from "@react-google-maps/api";
+import { Hub } from "aws-amplify";
 import Center from "layout/center";
 import { Farm } from "models";
-import { Dispatch, FC, ReactElement, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  FC,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import Modal from "react-modal";
 import { poligonOptions } from "styles/mapstyles";
 import { modalStyle } from "styles/modalStyle";
@@ -19,6 +27,16 @@ const CreateDrawingManager: FC<{
   ) => {
     console.log(drawingManager);
   };
+  useEffect(() => {
+    Hub.listen("ui", ({ payload }) => {
+      if (
+        payload.event === "actions:datastore:create:finished" ||
+        payload.event === "actions:datastore:update:finished"
+      ) {
+        setModalToOpen("");
+      }
+    });
+  }, []);
   const onPolygonComplete = (polygon: google.maps.Polygon) => {
     console.log(polygon);
     var coordStr = "";
@@ -31,7 +49,6 @@ const CreateDrawingManager: FC<{
     setPolygonString(coordStr);
     setModalToOpen("EditFarmView");
   };
-
   const createPolygonComponents = () => {
     // console.log("polygons:", polygons);
     const ret = polygons.map((item: string) => {
@@ -70,6 +87,7 @@ const CreateDrawingManager: FC<{
             overrides={{
               "Edit Farm": { children: "Create Farm" },
               Button34704491: { isDisabled: true },
+              Icon: { onClick: () => setModalToOpen("") },
             }}
           />
         </Center>

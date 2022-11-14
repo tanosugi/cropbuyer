@@ -126,20 +126,20 @@ export declare const Farm: (new (init: ModelInit<Farm, FarmMetaData>) => Farm) &
 
 type EagerCrop = {
   readonly id: string;
-  readonly name?: string | null;
-  readonly image_url?: string | null;
-  readonly description?: string | null;
-  readonly polygonColor?: string | null;
+  readonly name: string;
+  readonly image_url: string;
+  readonly description: string;
+  readonly polygonColor: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
 type LazyCrop = {
   readonly id: string;
-  readonly name?: string | null;
-  readonly image_url?: string | null;
-  readonly description?: string | null;
-  readonly polygonColor?: string | null;
+  readonly name: string;
+  readonly image_url: string;
+  readonly description: string;
+  readonly polygonColor: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

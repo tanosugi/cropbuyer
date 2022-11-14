@@ -8,7 +8,7 @@ export const modalStyle: Modal.Styles = {
   },
   content: {
     position: "absolute",
-    top: "10%",
+    top: "5%",
     left: "10%",
     right: "10%",
     bottom: "5rem",

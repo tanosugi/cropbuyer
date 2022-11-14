@@ -4,7 +4,7 @@ import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
 import { DataStore } from "aws-amplify";
 import config from "aws-exports";
 import exifr from "exifr";
-import useDataStoreQuery from "hooks/useDataStoreQuery";
+import useQueryPictures from "hooks/useQueryPictures";
 import Layout from "layout/layout";
 import { Picture } from "models";
 import { useCallback } from "react";
@@ -14,8 +14,8 @@ import { dropzoneActive, dropzoneStyles } from "styles/dropzoneStyles";
 import { dataURIToBlob } from "utils/dataURIToBlob";
 
 const AddImages = () => {
-  const { data: pictures, isLoading, error } = useDataStoreQuery(Picture);
-  console.log("pictures:", pictures);
+  // const { data: pictures, isLoading, error } = useDataStoreQuery(Picture);
+  const { pictures } = useQueryPictures();
   const uploadImage = async (file: FileWithPath, fileName: string) => {
     const result = await Storage.put(fileName, file);
     // console.log("result:", result);
@@ -85,7 +85,10 @@ const AddImages = () => {
           </div>
           {/* <AmplifyS3Album path={"resized/"} picker={false} /> */}
           {pictures?.map((picture) => (
-            <AmplifyS3Image imgKey={picture?.s3KeyRaw || ""} />
+            <AmplifyS3Image
+              key={picture?.s3KeyRaw || ""}
+              imgKey={picture?.s3KeyRaw || ""}
+            />
           ))}
         </section>
       </Layout>

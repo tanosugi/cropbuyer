@@ -15,7 +15,7 @@ export const useQueryFarmAndRecordArray = (
   yearToShow: number
 ) => {
   const [farms, setFarms] = useState<Farm[]>();
-  const [dictCrops, setDictCrops] = useState<DictCropNameToColor>();
+  const [dictCrops, setDictCrops] = useState<DictCropNameToColor>({});
   const [farmAndRecordArray, setFarmAndRecordArray] = useState<FarmAndRecord[]>(
     []
   );
