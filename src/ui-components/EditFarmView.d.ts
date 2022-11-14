@@ -6,11 +6,10 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { Farm, Grower } from "../models";
+import { Farm } from "../models";
 import { FlexProps } from "@aws-amplify/ui-react";
 export declare type EditFarmViewProps = React.PropsWithChildren<Partial<FlexProps> & {
     farm?: Farm;
-    grower?: Grower;
 } & {
     overrides?: EscapeHatchProps | undefined | null;
 }>;

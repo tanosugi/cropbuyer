@@ -94,6 +94,7 @@ const MyComponent = () => {
                 mapContainerStyle={containerStyle}
                 center={coordinates}
                 zoom={15}
+                mapTypeId="satellite"
                 options={{
                   mapId: String(process.env.NEXT_PUBLIC_GOOGLE_MAP_ID),
                 }}

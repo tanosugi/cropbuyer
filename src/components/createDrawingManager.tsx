@@ -86,7 +86,7 @@ const CreateDrawingManager: FC<{
             farm={new Farm({ polygonString: polygonString })}
             overrides={{
               "Edit Farm": { children: "Create Farm" },
-              Button34704491: { isDisabled: true },
+              Button35463354: { isDisabled: true },
               Icon: { onClick: () => setModalToOpen("") },
             }}
           />

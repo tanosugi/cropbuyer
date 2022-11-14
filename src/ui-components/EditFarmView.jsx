@@ -26,56 +26,50 @@ import {
   View,
 } from "@aws-amplify/ui-react";
 export default function EditFarmView(props) {
-  const { farm, grower, overrides, ...rest } = props;
+  const { farm, overrides, ...rest } = props;
   const [
-    textFieldThreeFourSevenZeroFourFourEightThreeValue,
-    setTextFieldThreeFourSevenZeroFourFourEightThreeValue,
+    textFieldThreeFiveFourSixThreeThreeFourFiveValue,
+    setTextFieldThreeFiveFourSixThreeThreeFourFiveValue,
   ] = useStateMutationAction("");
   const [
-    textFieldThreeFourNineThreeThreeOneSixTwoValue,
-    setTextFieldThreeFourNineThreeThreeOneSixTwoValue,
+    textFieldThreeFiveFourSixThreeThreeFourSixValue,
+    setTextFieldThreeFiveFourSixThreeThreeFourSixValue,
   ] = useStateMutationAction("");
   const [
-    textFieldThreeFourSevenZeroFourFourEightFourValue,
-    setTextFieldThreeFourSevenZeroFourFourEightFourValue,
+    textFieldThreeFiveFourSixThreeThreeFourSevenValue,
+    setTextFieldThreeFiveFourSixThreeThreeFourSevenValue,
   ] = useStateMutationAction("");
   const [
-    textFieldThreeFourEightNineThreeOneFourZeroValue,
-    setTextFieldThreeFourEightNineThreeOneFourZeroValue,
+    textFieldThreeFiveFourSixThreeThreeFourEightValue,
+    setTextFieldThreeFiveFourSixThreeThreeFourEightValue,
   ] = useStateMutationAction("");
   const [
-    textFieldThreeFourEightNineThreeOneZeroThreeValue,
-    setTextFieldThreeFourEightNineThreeOneZeroThreeValue,
+    textFieldThreeFiveFourSixThreeThreeFourNineValue,
+    setTextFieldThreeFiveFourSixThreeThreeFourNineValue,
   ] = useStateMutationAction("");
   const [textAreaFieldValue, setTextAreaFieldValue] =
     useStateMutationAction("");
-  const [
-    textFieldThreeFourNineThreeThreeOneSixNineValue,
-    setTextFieldThreeFourNineThreeThreeOneSixNineValue,
-  ] = useStateMutationAction("");
-  const buttonThreeFourSevenZeroFourFourNineZeroOnClick =
+  const buttonThreeFiveFourSixThreeThreeFiveThreeOnClick =
     useDataStoreCreateAction({
       fields: {
-        name: textFieldThreeFourSevenZeroFourFourEightThreeValue,
-        growerName: textFieldThreeFourNineThreeThreeOneSixTwoValue,
-        area: textFieldThreeFourSevenZeroFourFourEightFourValue,
-        latestStatus: textFieldThreeFourEightNineThreeOneFourZeroValue,
-        polygonString: textFieldThreeFourEightNineThreeOneFourZeroValue,
-        imaga_url: textFieldThreeFourEightNineThreeOneZeroThreeValue,
+        name: textFieldThreeFiveFourSixThreeThreeFourFiveValue,
+        growerName: textFieldThreeFiveFourSixThreeThreeFourSixValue,
+        area: textFieldThreeFiveFourSixThreeThreeFourSevenValue,
+        latestStatus: textFieldThreeFiveFourSixThreeThreeFourEightValue,
+        polygonString: textFieldThreeFiveFourSixThreeThreeFourNineValue,
         description: textAreaFieldValue,
       },
       model: Farm,
       schema: schema,
     });
-  const buttonThreeFourSevenZeroFourFourNineOneOnClick =
+  const buttonThreeFiveFourSixThreeThreeFiveFourOnClick =
     useDataStoreUpdateAction({
       fields: {
-        name: textFieldThreeFourSevenZeroFourFourEightThreeValue,
-        growerName: textFieldThreeFourNineThreeThreeOneSixTwoValue,
-        area: textFieldThreeFourSevenZeroFourFourEightFourValue,
-        latestStatus: textFieldThreeFourNineThreeThreeOneSixNineValue,
-        polygonString: textFieldThreeFourEightNineThreeOneFourZeroValue,
-        imaga_url: textFieldThreeFourEightNineThreeOneZeroThreeValue,
+        name: textFieldThreeFiveFourSixThreeThreeFourFiveValue,
+        growerName: textFieldThreeFiveFourSixThreeThreeFourSixValue,
+        area: textFieldThreeFiveFourSixThreeThreeFourSevenValue,
+        latestStatus: textFieldThreeFiveFourSixThreeThreeFourEightValue,
+        polygonString: textFieldThreeFiveFourSixThreeThreeFourNineValue,
         description: textAreaFieldValue,
       },
       id: farm?.id,
@@ -84,43 +78,43 @@ export default function EditFarmView(props) {
     });
   useEffect(() => {
     if (
-      textFieldThreeFourSevenZeroFourFourEightThreeValue === "" &&
+      textFieldThreeFiveFourSixThreeThreeFourFiveValue === "" &&
       farm !== undefined &&
       farm?.name !== undefined
     )
-      setTextFieldThreeFourSevenZeroFourFourEightThreeValue(farm?.name);
+      setTextFieldThreeFiveFourSixThreeThreeFourFiveValue(farm?.name);
   }, [farm]);
   useEffect(() => {
     if (
-      textFieldThreeFourNineThreeThreeOneSixTwoValue === "" &&
+      textFieldThreeFiveFourSixThreeThreeFourSixValue === "" &&
       farm !== undefined &&
       farm?.growerName !== undefined
     )
-      setTextFieldThreeFourNineThreeThreeOneSixTwoValue(farm?.growerName);
+      setTextFieldThreeFiveFourSixThreeThreeFourSixValue(farm?.growerName);
   }, [farm]);
   useEffect(() => {
     if (
-      textFieldThreeFourSevenZeroFourFourEightFourValue === "" &&
+      textFieldThreeFiveFourSixThreeThreeFourSevenValue === "" &&
       farm !== undefined &&
       farm?.area !== undefined
     )
-      setTextFieldThreeFourSevenZeroFourFourEightFourValue(farm?.area);
+      setTextFieldThreeFiveFourSixThreeThreeFourSevenValue(farm?.area);
   }, [farm]);
   useEffect(() => {
     if (
-      textFieldThreeFourEightNineThreeOneFourZeroValue === "" &&
+      textFieldThreeFiveFourSixThreeThreeFourEightValue === "" &&
+      farm !== undefined &&
+      farm?.latestStatus !== undefined
+    )
+      setTextFieldThreeFiveFourSixThreeThreeFourEightValue(farm?.latestStatus);
+  }, [farm]);
+  useEffect(() => {
+    if (
+      textFieldThreeFiveFourSixThreeThreeFourNineValue === "" &&
       farm !== undefined &&
       farm?.polygonString !== undefined
     )
-      setTextFieldThreeFourEightNineThreeOneFourZeroValue(farm?.polygonString);
-  }, [farm]);
-  useEffect(() => {
-    if (
-      textFieldThreeFourEightNineThreeOneZeroThreeValue === "" &&
-      farm !== undefined &&
-      farm?.imaga_url !== undefined
-    )
-      setTextFieldThreeFourEightNineThreeOneZeroThreeValue(farm?.imaga_url);
+      setTextFieldThreeFiveFourSixThreeThreeFourNineValue(farm?.polygonString);
   }, [farm]);
   useEffect(() => {
     if (
@@ -129,14 +123,6 @@ export default function EditFarmView(props) {
       farm?.description !== undefined
     )
       setTextAreaFieldValue(farm?.description);
-  }, [farm]);
-  useEffect(() => {
-    if (
-      textFieldThreeFourNineThreeThreeOneSixNineValue === "" &&
-      farm !== undefined &&
-      farm?.latestStatus !== undefined
-    )
-      setTextFieldThreeFourNineThreeThreeOneSixNineValue(farm?.latestStatus);
   }, [farm]);
   return (
     <Flex
@@ -253,7 +239,7 @@ export default function EditFarmView(props) {
           padding="0px 0px 0px 0px"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider34704481")}
+          {...getOverrideProps(overrides, "Divider35463343")}
         ></Divider>
         <Flex
           gap="16px"
@@ -286,13 +272,13 @@ export default function EditFarmView(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeFourSevenZeroFourFourEightThreeValue}
+            value={textFieldThreeFiveFourSixThreeThreeFourFiveValue}
             onChange={(event) => {
-              setTextFieldThreeFourSevenZeroFourFourEightThreeValue(
+              setTextFieldThreeFiveFourSixThreeThreeFourFiveValue(
                 event.target.value
               );
             }}
-            {...getOverrideProps(overrides, "TextField34704483")}
+            {...getOverrideProps(overrides, "TextField35463345")}
           ></TextField>
           <TextField
             display="flex"
@@ -312,13 +298,13 @@ export default function EditFarmView(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeFourNineThreeThreeOneSixTwoValue}
+            value={textFieldThreeFiveFourSixThreeThreeFourSixValue}
             onChange={(event) => {
-              setTextFieldThreeFourNineThreeThreeOneSixTwoValue(
+              setTextFieldThreeFiveFourSixThreeThreeFourSixValue(
                 event.target.value
               );
             }}
-            {...getOverrideProps(overrides, "TextField34933162")}
+            {...getOverrideProps(overrides, "TextField35463346")}
           ></TextField>
           <TextField
             display="flex"
@@ -338,13 +324,13 @@ export default function EditFarmView(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeFourSevenZeroFourFourEightFourValue}
+            value={textFieldThreeFiveFourSixThreeThreeFourSevenValue}
             onChange={(event) => {
-              setTextFieldThreeFourSevenZeroFourFourEightFourValue(
+              setTextFieldThreeFiveFourSixThreeThreeFourSevenValue(
                 event.target.value
               );
             }}
-            {...getOverrideProps(overrides, "TextField34704484")}
+            {...getOverrideProps(overrides, "TextField35463347")}
           ></TextField>
           <TextField
             display="flex"
@@ -364,13 +350,13 @@ export default function EditFarmView(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeFourNineThreeThreeOneSixNineValue}
+            value={textFieldThreeFiveFourSixThreeThreeFourEightValue}
             onChange={(event) => {
-              setTextFieldThreeFourNineThreeThreeOneSixNineValue(
+              setTextFieldThreeFiveFourSixThreeThreeFourEightValue(
                 event.target.value
               );
             }}
-            {...getOverrideProps(overrides, "TextField34933169")}
+            {...getOverrideProps(overrides, "TextField35463348")}
           ></TextField>
           <TextField
             display="flex"
@@ -390,39 +376,13 @@ export default function EditFarmView(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeFourEightNineThreeOneFourZeroValue}
+            value={textFieldThreeFiveFourSixThreeThreeFourNineValue}
             onChange={(event) => {
-              setTextFieldThreeFourEightNineThreeOneFourZeroValue(
+              setTextFieldThreeFiveFourSixThreeThreeFourNineValue(
                 event.target.value
               );
             }}
-            {...getOverrideProps(overrides, "TextField34893140")}
-          ></TextField>
-          <TextField
-            display="flex"
-            gap="8px"
-            direction="column"
-            width="unset"
-            height="unset"
-            justifyContent="center"
-            alignItems="flex-start"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            label="Image URL"
-            placeholder="https://unsplash.com/xxx"
-            size="default"
-            isDisabled={false}
-            labelHidden={false}
-            variation="default"
-            value={textFieldThreeFourEightNineThreeOneZeroThreeValue}
-            onChange={(event) => {
-              setTextFieldThreeFourEightNineThreeOneZeroThreeValue(
-                event.target.value
-              );
-            }}
-            {...getOverrideProps(overrides, "TextField34893103")}
+            {...getOverrideProps(overrides, "TextField35463349")}
           ></TextField>
           <TextAreaField
             display="flex"
@@ -462,7 +422,7 @@ export default function EditFarmView(props) {
           padding="0px 0px 0px 0px"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider34704488")}
+          {...getOverrideProps(overrides, "Divider35463351")}
         ></Divider>
         <View
           width="176px"
@@ -492,9 +452,9 @@ export default function EditFarmView(props) {
             variation="primary"
             children="Save"
             onClick={() => {
-              buttonThreeFourSevenZeroFourFourNineZeroOnClick();
+              buttonThreeFiveFourSixThreeThreeFiveThreeOnClick();
             }}
-            {...getOverrideProps(overrides, "Button34704490")}
+            {...getOverrideProps(overrides, "Button35463353")}
           ></Button>
           <Button
             display="flex"
@@ -512,9 +472,9 @@ export default function EditFarmView(props) {
             variation="primary"
             children="Update"
             onClick={() => {
-              buttonThreeFourSevenZeroFourFourNineOneOnClick();
+              buttonThreeFiveFourSixThreeThreeFiveFourOnClick();
             }}
-            {...getOverrideProps(overrides, "Button34704491")}
+            {...getOverrideProps(overrides, "Button35463354")}
           ></Button>
         </View>
       </Flex>

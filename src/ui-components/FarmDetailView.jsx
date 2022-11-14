@@ -7,9 +7,9 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Icon, Image, Rating, Text } from "@aws-amplify/ui-react";
+import { Flex, Icon, Rating, Text, View } from "@aws-amplify/ui-react";
 export default function FarmDetailView(props) {
-  const { farm, overrides, ...rest } = props;
+  const { farm, rectangle2, overrides, ...rest } = props;
   return (
     <Flex
       gap="0"
@@ -94,7 +94,7 @@ export default function FarmDetailView(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "GrowerCardView")}
         >
-          <Image
+          <View
             width="112px"
             height="112px"
             display="block"
@@ -104,9 +104,10 @@ export default function FarmDetailView(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            objectFit="cover"
-            {...getOverrideProps(overrides, "image 2")}
-          ></Image>
+            backgroundColor="rgba(217,217,217,1)"
+            children={rectangle2}
+            {...getOverrideProps(overrides, "Rectangle 2")}
+          ></View>
           <Flex
             gap="0"
             direction="column"

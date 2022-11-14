@@ -10,6 +10,7 @@ import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { FlexProps } from "@aws-amplify/ui-react";
 export declare type FarmDetailViewProps = React.PropsWithChildren<Partial<FlexProps> & {
     farm?: Farm;
+    rectangle2?: React.ReactNode;
 } & {
     overrides?: EscapeHatchProps | undefined | null;
 }>;

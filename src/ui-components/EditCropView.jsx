@@ -37,12 +37,17 @@ export default function EditCropView(props) {
   ] = useStateMutationAction("");
   const [textAreaFieldValue, setTextAreaFieldValue] =
     useStateMutationAction("");
+  const [
+    textFieldThreeFiveFourZeroThreeOneSixSevenValue,
+    setTextFieldThreeFiveFourZeroThreeOneSixSevenValue,
+  ] = useStateMutationAction("");
   const buttonThreeFourSevenZeroFourFiveFourFiveOnClick =
     useDataStoreCreateAction({
       fields: {
         name: textFieldThreeFourSevenZeroFourFiveThreeEightValue,
         image_url: textFieldThreeFourSevenZeroFourFiveThreeNineValue,
         description: textAreaFieldValue,
+        polygonColor: textFieldThreeFiveFourZeroThreeOneSixSevenValue,
       },
       model: Crop,
       schema: schema,
@@ -53,6 +58,7 @@ export default function EditCropView(props) {
         name: textFieldThreeFourSevenZeroFourFiveThreeEightValue,
         image_url: textFieldThreeFourSevenZeroFourFiveThreeNineValue,
         description: textAreaFieldValue,
+        polygonColor: textFieldThreeFiveFourZeroThreeOneSixSevenValue,
       },
       id: crop?.id,
       model: Crop,
@@ -81,6 +87,14 @@ export default function EditCropView(props) {
       crop?.description !== undefined
     )
       setTextAreaFieldValue(crop?.description);
+  }, [crop]);
+  useEffect(() => {
+    if (
+      textFieldThreeFiveFourZeroThreeOneSixSevenValue === "" &&
+      crop !== undefined &&
+      crop?.polygonColor !== undefined
+    )
+      setTextFieldThreeFiveFourZeroThreeOneSixSevenValue(crop?.polygonColor);
   }, [crop]);
   return (
     <Flex
@@ -282,6 +296,12 @@ export default function EditCropView(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
+            value={textFieldThreeFiveFourZeroThreeOneSixSevenValue}
+            onChange={(event) => {
+              setTextFieldThreeFiveFourZeroThreeOneSixSevenValue(
+                event.target.value
+              );
+            }}
             {...getOverrideProps(overrides, "TextField35403167")}
           ></TextField>
           <TextAreaField

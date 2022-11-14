@@ -57,10 +57,14 @@ const AddImages = () => {
         s3KeyResized: `resized/${fileName}`,
         urlRaw: `https://${config.aws_user_files_s3_bucket}.s3.${config.aws_user_files_s3_bucket_region}.amazonaws.com/public/raw/${fileName}`,
         urlResized: `https://${config.aws_user_files_s3_bucket}.s3.${config.aws_user_files_s3_bucket_region}.amazonaws.com/public/resized/${fileName}`,
-        lat: respExifrGps?.latitude,
-        lng: respExifrGps?.longitude,
+        // lat: respExifrGps?.latitude,
+        // lng: respExifrGps?.longitude,
+        // createDate: respExifrParse?.CreateDate.toISOString(),
+        // createYear: respExifrParse?.CreateDate?.getFullYear(),
+        lat: 39.79 + (39.85 - 39.79) * Math.random(),
+        lng: 140.05 + (140.12 - 140.05) * Math.random(),
         createDate: respExifrParse?.CreateDate.toISOString(),
-        createYear: respExifrParse?.CreateDate?.getFullYear(),
+        createYear: Math.floor(2016.999 + 3 * Math.random()),
       });
       console.log("picture:", picture);
       await DataStore.save(picture);
@@ -86,8 +90,8 @@ const AddImages = () => {
           {/* <AmplifyS3Album path={"resized/"} picker={false} /> */}
           {pictures?.map((picture) => (
             <AmplifyS3Image
-              key={picture?.s3KeyRaw || ""}
-              imgKey={picture?.s3KeyRaw || ""}
+              key={picture?.s3KeyResized || ""}
+              imgKey={picture?.s3KeyResized || ""}
             />
           ))}
         </section>

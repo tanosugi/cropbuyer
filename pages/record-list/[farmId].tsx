@@ -1,5 +1,6 @@
 import { Authenticator } from "@aws-amplify/ui-react";
-import { DataStore, Hub } from "aws-amplify";
+import { GoogleMap, Polygon, useLoadScript } from "@react-google-maps/api";
+import { DataStore, Hub, SortDirection } from "aws-amplify";
 import Center from "layout/center";
 import Layout from "layout/layout";
 import { Farm, Record } from "models";
@@ -13,6 +14,11 @@ import {
   FarmDetailView,
   RecordCardViewCollection,
 } from "ui-components";
+import {
+  polygonStrToCenterLatLng,
+  polygonStrToLatLng,
+  polygonToZoom,
+} from "utils/maputil";
 
 const RecordList = () => {
   const [farm, setFarm] = useState<Farm>();
@@ -39,8 +45,10 @@ const RecordList = () => {
     }
   };
   const fetchRecord = async (farmName: string) => {
-    const respRecord = await DataStore.query(Record, (r) =>
-      r.farmName("eq", farmName)
+    const respRecord = await DataStore.query(
+      Record,
+      (r) => r.farmName("eq", farmName),
+      { sort: (s) => s.year(SortDirection.DESCENDING) }
     );
     await console.log("respRecord:", respRecord);
     if (respRecord) {
@@ -59,72 +67,102 @@ const RecordList = () => {
       subscription.unsubscribe();
     };
   }, [farm]);
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: String(process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY),
+    libraries: ["places", "drawing"],
+    mapIds: [String(process.env.NEXT_PUBLIC_GOOGLE_MAP_ID)],
+  });
   return (
-    <Authenticator>
-      <Layout>
-        <Center>
-          {farm && (
-            <FarmDetailView
-              farm={farm}
-              overrides={{
-                "close-circle": { onClick: () => router.push("/growers") },
-              }}
-            />
-          )}
-          <AddButton
-            overrides={{
-              AddButton: {
-                onClick: () => setModalToOpen("AddRecordView"),
-              },
-            }}
-          />
-          <Modal isOpen={modalToOpen == "AddRecordView"} style={modalStyle}>
-            <Center>
-              <EditRecordView
-                record={new Record({ farmName: farm?.name })}
+    isLoaded && (
+      <Authenticator>
+        <Layout>
+          <Center>
+            {farm && (
+              <FarmDetailView
+                farm={farm}
                 overrides={{
-                  "Edit Record": { children: "Create Crop" },
-                  Button34704601: { isDisabled: true },
-                  Icon: { onClick: () => setModalToOpen("") },
-                }}
-              />
-            </Center>
-          </Modal>
-          {records && (
-            <>
-              <RecordCardViewCollection
-                items={records}
-                overrideItems={({ item, index }) => ({
-                  overrides: {
-                    "Frame 7": {
-                      onClick: () => {
-                        setModalToOpen("EditRecordView");
-                        setRecordToEdit(item);
-                      },
+                  "close-circle": {
+                    onClick: () => {
+                      router.push("/growers");
                     },
                   },
-                })}
+                }}
+                rectangle2={
+                  <GoogleMap
+                    mapContainerStyle={{ height: "112px", width: "112px" }}
+                    center={polygonStrToCenterLatLng(farm?.polygonString || "")}
+                    zoom={polygonToZoom(farm?.polygonString || "")}
+                    options={{ disableDefaultUI: true }}
+                    mapTypeId={"satellite"}
+                  >
+                    <Polygon
+                      path={polygonStrToLatLng(farm?.polygonString || "")}
+                    />
+                  </GoogleMap>
+                }
               />
+            )}
+            <AddButton
+              overrides={{
+                AddButton: {
+                  onClick: () => setModalToOpen("AddRecordView"),
+                },
+              }}
+            />
+            <Modal isOpen={modalToOpen == "AddRecordView"} style={modalStyle}>
+              <Center>
+                <EditRecordView
+                  record={
+                    new Record({
+                      farmName: farm?.name,
+                      image_url:
+                        "https://images.unsplash.com/photo-1652407782575-3f5805f9d220?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=MnwxfDB8MXxyYW5kb218MHx8cmljZS1jcm9wfHx8fHx8MTY2ODQwNjcyOQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=300",
+                    })
+                  }
+                  overrides={{
+                    "Edit Record": { children: "Create Crop" },
+                    Button34704601: { isDisabled: true },
+                    Icon: { onClick: () => setModalToOpen("") },
+                  }}
+                />
+              </Center>
+            </Modal>
+            {records && (
+              <>
+                <RecordCardViewCollection
+                  items={records}
+                  overrideItems={({ item, index }) => ({
+                    overrides: {
+                      "Frame 7": {
+                        onClick: () => {
+                          setModalToOpen("EditRecordView");
+                          setRecordToEdit(item);
+                        },
+                      },
+                    },
+                  })}
+                />
 
-              <Modal
-                isOpen={modalToOpen == "EditRecordView"}
-                style={modalStyle}
-              >
-                <Center>
-                  <EditRecordView
-                    record={recordToEdit}
-                    overrides={{
-                      Button34704600: { isDisabled: true },
-                      Icon: { onClick: () => setModalToOpen("") },
-                    }}
-                  />
-                </Center>
-              </Modal>
-            </>
-          )}
-        </Center>
-      </Layout>
-    </Authenticator>
+                <Modal
+                  isOpen={modalToOpen == "EditRecordView"}
+                  style={modalStyle}
+                >
+                  <Center>
+                    <EditRecordView
+                      record={recordToEdit}
+                      overrides={{
+                        Button34704600: { isDisabled: true },
+                        Icon: { onClick: () => setModalToOpen("") },
+                      }}
+                    />
+                  </Center>
+                </Modal>
+              </>
+            )}
+          </Center>
+        </Layout>
+      </Authenticator>
+    )
   );
 };
 

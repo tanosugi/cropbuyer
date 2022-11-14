@@ -99,7 +99,6 @@ type EagerFarm = {
   readonly area?: string | null;
   readonly latestStatus?: number | null;
   readonly polygonString?: string | null;
-  readonly imaga_url?: string | null;
   readonly description?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -112,7 +111,6 @@ type LazyFarm = {
   readonly area?: string | null;
   readonly latestStatus?: number | null;
   readonly polygonString?: string | null;
-  readonly imaga_url?: string | null;
   readonly description?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

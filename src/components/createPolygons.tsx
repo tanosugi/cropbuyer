@@ -33,28 +33,28 @@ const CreatePolygons: FC<{
             dictCrops
           );
           let color;
-          if (
+          if (!isYearly) {
+            color = "black";
+          } else if (
             farmAndRecord?.record?.cropName &&
             dictCrops &&
             farmAndRecord?.record?.cropName in dictCrops
           ) {
             color = dictCrops[farmAndRecord?.record?.cropName] || "pink";
-          } else {
-            // color = "red";
           }
           let opacity = 0;
           if (isYearly) {
             opacity = Math.min(
-              5,
-              farmAndRecord?.record?.statusRating || opacity
+              1,
+              (farmAndRecord?.record?.statusRating || opacity) * 0.2
             );
           } else {
-            opacity = Math.min(5, farm.latestStatus || opacity);
+            opacity = 0;
           }
           console.log("color:", color);
           const poligonOptions = {
             fillColor: color,
-            fillOpacity: opacity * 0.1,
+            fillOpacity: opacity,
             strokeColor: color,
             ...poligonOptionsBasic,
           };

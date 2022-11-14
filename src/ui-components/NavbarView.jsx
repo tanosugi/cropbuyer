@@ -19,7 +19,7 @@ export default function NavbarView(props) {
       gap="168px"
       direction="row"
       width="320px"
-      height="27px"
+      height="38px"
       justifyContent="space-between"
       alignItems="center"
       position="relative"
@@ -64,7 +64,7 @@ export default function NavbarView(props) {
               minX: 0,
               minY: 0,
               width: 12.375,
-              height: 24.513763427734375,
+              height: 24.51373291015625,
             }}
             paths={[
               {
@@ -87,7 +87,7 @@ export default function NavbarView(props) {
         </View>
         <Text
           fontFamily="Inter"
-          fontSize="16px"
+          fontSize="20px"
           fontWeight="400"
           color="rgba(46,72,50,1)"
           lineHeight="24px"
@@ -95,7 +95,7 @@ export default function NavbarView(props) {
           display="block"
           direction="column"
           justifyContent="unset"
-          letterSpacing="0.01px"
+          letterSpacing="0.05px"
           width="unset"
           height="unset"
           gap="unset"

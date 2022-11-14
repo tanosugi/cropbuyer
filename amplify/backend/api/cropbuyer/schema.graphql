@@ -28,7 +28,6 @@ type Farm @model @auth(rules: [{allow: private}]) {
   area: String
   latestStatus: Int
   polygonString: String
-  imaga_url: String
   description: String
 }
 
