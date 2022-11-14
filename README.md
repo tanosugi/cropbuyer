@@ -8,6 +8,8 @@ Most of our food are come from farm. They are transported and processed at the p
 
 Some of buyers belong to trading companies and procure crops such as rice or wheat to export. Some of buyers belong to plants such as dry potato plant and procure crops as their raw material.
 
+![crop-buyer.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435234393/iGf6k5sHu.png)
+
 ## Problem and our Motivation
 
 Status of farm is important for buyers of crops because they have to forecast volume of procurement.
@@ -23,14 +25,20 @@ We know there are already many apps for growers to record their own farm but the
 On [Map Page](https://crop-buyer.tanosugi.com/map), you can write polygon and save as farm with name, description, latest status (rating)
 To start writing polygon, please click polygon button top write of the map.
 
+![write-polygon.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435444826/0BF4r49R9.png)
+
 ## Show Farm Information on the Map
 
 Recorded farm are shown on the map as polygon.
 If you turn on “Farm Info.” Switch, you can see farm information on the map as information window which you input. If you turn off the switch, you can see single farm information by mouse over or click the translucent marker at the center of the polygon.
 
+![farm-info.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435575267/o81jF_p3v.png)
+
 ## Upload Image with GPS data and See on the Map with Timeline
 
 On the [Add Images Page](https://crop-buyer.tanosugi.com/add-images), you can upload image from PC or mobile. If with PC, you can drag and drop pictures. Most of pictures taken by mobile of modern digital camera, GPS data where you take the picture and timeline data when pictures were taken are recorded in the picture image file. Uploaded pictures are shown on the map and. If you turn on “Yearly Switch”, you can choose year to show. For an example you choose 2018, only picture taken on 2018 are shown on the map.
+
+![upload-images.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435741455/OeXVeDnLC.png)
 
 ## Show yearly status of the farm on the map with colors
 
@@ -45,21 +53,34 @@ Filled with light yellow (or blue): Status is bad
 
 You can move slider control and change the year, and you can see that soy bean (green color) were grown in 2017, 18, changed to rice (yellow color) after 2019, only rice was grown on 2022
 
+
+soy bean (green color) were grown in 2017
+![soybean2017.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435832484/wALxY0E5R.png)
+
+only rice was grown on 2022
+![only-rice-2022.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435885110/ISBLmYrvg.png)
+
 ## Add or Edit Crops, Growers, Farm, Yearly Record of Farm.
 
 ### Add or Edit Crops
 
 On [Crops Page](https://crop-buyer.tanosugi.com/crops), you can add and edit crop in addition to pre-set crops.
 
+![crops.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668435951103/OW33DjJLE.png)
+
 ### Add or Edit Growers
 
 On [Growers Page](https://crop-buyer.tanosugi.com/growers), you can add and edit growers. You can start writing email or calling over the phone by clicking those icons. [Farm List Page](https://crop-buyer.tanosugi.com/farm-list/22529bf5-2e46-45f0-9290-efaa48dddbc4) of the grower are shown if you click the icon.
+
+![growers.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668436007022/xB_J1TdGa.png)
 
 ### Add or Edit Farms
 
 If you want to add Farm, you need to start by clicking polygon button top write of the map on [Map Page](https://crop-buyer.tanosugi.com/map). After you write polygon, you can enter the name, description, area (hectare), latest status (rating) of the farm before saving.
 
 If you want to edit saved farms, you can open [Farm List Page](https://crop-buyer.tanosugi.com/farm-list/22529bf5-2e46-45f0-9290-efaa48dddbc4) from [Growers Page](https://crop-buyer.tanosugi.com/growers).
+
+![farms.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668436047776/63YRk6O6I.png)
 
 ### Add or Edit Yearly Record of Farms
 
@@ -72,6 +93,8 @@ Choose the Farm on [Farm List Page](https://crop-buyer.tanosugi.com/farm-list/22
 ->
 
 Then, you can visit [Record List Page](https://crop-buyer.tanosugi.com/record-list/8ce85b1d-557b-49b9-b959-7f1e723bd134) to add or edit Yearly Record of Farms.
+
+![records.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1668436090211/Pk1bF-saz.png)
 
 # How we built it
 
@@ -337,14 +360,16 @@ I am wondering if showing so many polygon and info windows. It was no problem on
 I wanted to use advanced markers and animation for the app but they were not covered in @react-google-maps/api and I could not find good tutorial and code example other than official document, hence, I gave up to use.
 
 ## Accomplishments that we're proud of
+
 We are proud that we were able to create a web application that is practical to a certain degree, despite the fact that it was the first time we developed using Google maps.
 Before Google map API, it would have taken a lot of time, effort, and money to create a software application that records information on farmland and visualizes the photos and locations where the photos were taken, but thanks to Google map API, it is now possible to create such an application in a hackathon. I am proud of the fact that we have started to use Google map API, but before that, I would like to thank Google for providing us with a great API.
 
 ## What we learned
+
 This time, thanks to Google map API, we were able to create something close to MVP. However, although there were other functions we wanted to achieve, it took about three times as long as expected to create the basic functions, and we were not able to get to that point.
 
 It is often said that development takes 3 to 5 times longer than expected, so think carefully before starting development. However, since we were able to create a basic function and submit it, we were able to accomplish one of our goals first.
 
 ## What's next for a
-At first, I wanted to make a travel app based on the sample app which show airplane flying animation, but I gave up because the React library was not yet available and I could not find good sample code. I think the code submitted by other teams in this hackathon will give me an idea of how to achieve this, so next time I would like to make a travel app with animation.
 
+At first, I wanted to make a travel app based on the sample app which show airplane flying animation, but I gave up because the React library was not yet available and I could not find good sample code. I think the code submitted by other teams in this hackathon will give me an idea of how to achieve this, so next time I would like to make a travel app with animation.
