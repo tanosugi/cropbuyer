@@ -31,12 +31,6 @@ const CreatePictureInfoWindows: FC<{
     <>
       {pictures &&
         pictures.map((picture: Picture) => {
-          // console.log("picture.s3KeyResized:", picture.s3KeyResized);
-          // console.log(
-          //   "!isYearly || yearToShow == picture?.createYear:",
-          //   picture?.s3KeyRaw,
-          //   !isYearly || yearToShow == picture?.createYear
-          // );
           return !isYearly || yearToShow == picture?.createYear ? (
             <InfoWindow
               key={picture.s3KeyResized}
@@ -47,7 +41,6 @@ const CreatePictureInfoWindows: FC<{
                 style={{ height: "100px" }}
                 imgKey={picture.s3KeyResized || ""}
               />
-              {/* </View> */}
             </InfoWindow>
           ) : (
             <></>

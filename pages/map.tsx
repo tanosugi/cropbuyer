@@ -35,11 +35,12 @@ const MyComponent = () => {
     mapIds: [String(process.env.NEXT_PUBLIC_GOOGLE_MAP_ID)],
   });
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {
-        setCoordinates({ lat: latitude, lng: longitude });
-      }
-    );
+    // navigator.geolocation.getCurrentPosition(
+    //   ({ coords: { latitude, longitude } }) => {
+    //     setCoordinates({ lat: latitude, lng: longitude });
+    //   }
+    // );
+    setCoordinates({ lat: 39.824632, lng: 140.072084 });
   }, []);
   const mapOnLoad = async (mapInstance: google.maps.Map) => {
     addTiltRotateControl(mapInstance);
