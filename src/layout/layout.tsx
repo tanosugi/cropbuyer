@@ -1,7 +1,8 @@
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import Center from "layout/center";
+import LogRocket from "logrocket";
 import { useRouter } from "next/router";
-import { FC, ReactElement, ReactNode, useState } from "react";
+import { FC, ReactElement, ReactNode, useEffect, useState } from "react";
 import Modal from "react-modal";
 import { menueModalStyle } from "styles/modalStyle";
 import { MenueView, NavbarView } from "ui-components";
@@ -11,9 +12,9 @@ const Layout: FC<{ children: ReactNode }> = ({ children }): ReactElement => {
   const [modalToOpen, setModalToOpen] = useState("");
   const router = useRouter();
   const { user, signOut } = useAuthenticator((context) => [context.user]);
-  // useEffect(() => {
-  //   LogRocket.identify(user?.attributes?.email || "anonymous user");
-  // }, [user]);
+  useEffect(() => {
+    LogRocket.identify(user?.attributes?.email || "anonymous user");
+  }, [user]);
   return (
     <>
       <NavbarView
