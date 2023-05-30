@@ -40,13 +40,7 @@
     "adminQueries": false,
     "thirdPartyAuth": false,
     "authProviders": [],
-    "hostedUI": true,
-    "hostedUIDomainName": "unpfafeivzlb",
-    "authProvidersUserPool": [
-      "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid profile\",\"AttributeMapping\":{\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"myapp://\"],\"LogoutURLs\":[\"myapp://\"]}",
+    "hostedUI": false,
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
