@@ -6,7 +6,7 @@ import CreateDrawingManager from "components/createDrawingManager";
 import CreatePictureInfoWindows from "components/createPictureInfoWindows";
 import CreatePolygons from "components/createPolygons";
 import Layout from "layout/layout";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MapControlView } from "ui-components";
 import { addTiltRotateControl } from "utils/addTiltRotateControl";
 const containerStyle = {
@@ -20,6 +20,7 @@ const libraries: (
   | "places"
   | "visualization"
 )[] = ["places", "drawing"];
+// const libraries = ["places", "drawing"];
 const MyComponent = () => {
   const [isShowFarmInfo, setIsShowFarmInfo] = useState(true);
   const [isShowPictures, setIsShowPictures] = useState(true);
@@ -43,9 +44,15 @@ const MyComponent = () => {
     setCoordinates({ lat: 39.824632, lng: 140.072084 });
   }, []);
   const mapOnLoad = async (mapInstance: google.maps.Map) => {
+    // const mapOnLoad = async (mapInstance) => {
     addTiltRotateControl(mapInstance);
   };
-
+  const onChangeSliderField: any = (value: number) => {
+    // onChange: (value) => {
+    setYearToShow(value);
+    return;
+    // console.log("yearToShow:", yearToShow);
+  };
   return (
     isLoaded && (
       <Authenticator>
@@ -54,24 +61,26 @@ const MyComponent = () => {
             <MapControlView
               overrides={{
                 SwitchField35313346: {
-                  value: isShowFarmInfo,
-                  onChange: (
-                    event: React.ChangeEventHandler<HTMLInputElement>
-                  ) => {
+                  isChecked: isShowFarmInfo,
+                  onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+                    // onChange: (event) => {
                     setIsShowFarmInfo(!isShowFarmInfo);
+                    return;
                     // console.log("isShowFarmInfo:", isShowFarmInfo);
                   },
                 },
                 SwitchField35313347: {
-                  value: isShowPictures,
-                  onChange: (e: React.ChangeEventHandler<HTMLInputElement>) => {
+                  isChecked: isShowPictures,
+                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                    // onChange: (e) => {
                     setIsShowPictures(!isShowPictures);
                     // console.log("isShowPictures:", isShowPictures);
                   },
                 },
                 SwitchField35313348: {
-                  value: isYearly,
-                  onChange: (e: React.ChangeEventHandler<HTMLInputElement>) => {
+                  isChecked: isYearly,
+                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                    // onChange: (e) => {
                     setIsYearly(!isYearly);
                     // console.log("isYearly:", isYearly);
                   },
@@ -82,10 +91,7 @@ const MyComponent = () => {
                   value: yearToShow,
                   min: 2015,
                   max: 2023,
-                  onChange: (value: number) => {
-                    setYearToShow(value);
-                    // console.log("yearToShow:", yearToShow);
-                  },
+                  onChange: onChangeSliderField,
                 },
               }}
             />
