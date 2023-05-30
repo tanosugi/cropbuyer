@@ -20,8 +20,8 @@ export default function FarmInfoSwitchView(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "FarmInfoSwitchView")}
+      {...rest}
     >
       <SwitchField
         display="flex"

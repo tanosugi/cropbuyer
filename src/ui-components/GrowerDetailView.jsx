@@ -20,8 +20,8 @@ export default function GrowerDetailView(props) {
       alignItems="center"
       position="relative"
       padding="5px 5px 5px 5px"
-      {...rest}
       {...getOverrideProps(overrides, "GrowerDetailView")}
+      {...rest}
     >
       <Flex
         gap="10px"

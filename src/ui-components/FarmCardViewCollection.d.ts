@@ -8,6 +8,11 @@ import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { FarmCardViewProps } from "./FarmCardView";
 import { CollectionProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type FarmCardViewCollectionOverridesProps = {
+    FarmCardViewCollection?: PrimitiveOverrideProps<CollectionProps>;
+    FarmCardView?: FarmCardViewProps;
+} & EscapeHatchProps;
 export declare type FarmCardViewCollectionProps = React.PropsWithChildren<Partial<CollectionProps<any>> & {
     items?: any[];
     overrideItems?: (collectionItem: {
@@ -15,6 +20,6 @@ export declare type FarmCardViewCollectionProps = React.PropsWithChildren<Partia
         index: number;
     }) => FarmCardViewProps;
 } & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: FarmCardViewCollectionOverridesProps | undefined | null;
 }>;
 export default function FarmCardViewCollection(props: FarmCardViewCollectionProps): React.ReactElement;

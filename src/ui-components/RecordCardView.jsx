@@ -6,18 +6,18 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Record } from "../models";
 import {
   getOverrideProps,
   useDataStoreDeleteAction,
 } from "@aws-amplify/ui-react/internal";
-import { Record } from "../models";
 import { schema } from "../models/schema";
 import { Flex, Icon, Image, Rating, Text, View } from "@aws-amplify/ui-react";
 export default function RecordCardView(props) {
   const { record, overrides, ...rest } = props;
   const frameEightOnClick = useDataStoreDeleteAction({
-    id: record?.id,
     model: Record,
+    id: record?.id,
     schema: schema,
   });
   return (
@@ -32,8 +32,8 @@ export default function RecordCardView(props) {
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       padding="5px 5px 5px 5px"
       backgroundColor="rgba(250,250,250,1)"
-      {...rest}
       {...getOverrideProps(overrides, "RecordCardView")}
+      {...rest}
     >
       <Image
         width="111px"

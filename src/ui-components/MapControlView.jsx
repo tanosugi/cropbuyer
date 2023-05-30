@@ -20,8 +20,8 @@ export default function MapControlView(props) {
       alignItems="center"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "MapControlView")}
+      {...rest}
     >
       <Flex
         gap="10px"

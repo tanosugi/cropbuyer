@@ -6,8 +6,15 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FlexProps } from "@aws-amplify/ui-react";
+import { FlexProps, IconProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type AddButtonOverridesProps = {
+    AddButton?: PrimitiveOverrideProps<FlexProps>;
+    "plus-circle"?: PrimitiveOverrideProps<ViewProps>;
+    Vector?: PrimitiveOverrideProps<IconProps>;
+    add?: PrimitiveOverrideProps<TextProps>;
+} & EscapeHatchProps;
 export declare type AddButtonProps = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: AddButtonOverridesProps | undefined | null;
 }>;
 export default function AddButton(props: AddButtonProps): React.ReactElement;

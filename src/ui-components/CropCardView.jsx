@@ -6,18 +6,18 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Crop } from "../models";
 import {
   getOverrideProps,
   useDataStoreDeleteAction,
 } from "@aws-amplify/ui-react/internal";
-import { Crop } from "../models";
 import { schema } from "../models/schema";
 import { Flex, Icon, Image, Text, View } from "@aws-amplify/ui-react";
 export default function CropCardView(props) {
   const { crop, overrides, ...rest } = props;
   const frameEightOnClick = useDataStoreDeleteAction({
-    id: crop?.id,
     model: Crop,
+    id: crop?.id,
     schema: schema,
   });
   return (
@@ -32,8 +32,8 @@ export default function CropCardView(props) {
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       padding="5px 5px 5px 5px"
       backgroundColor="rgba(250,250,250,1)"
-      {...rest}
       {...getOverrideProps(overrides, "CropCardView")}
+      {...rest}
     >
       <Image
         width="unset"

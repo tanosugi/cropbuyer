@@ -19,9 +19,9 @@ export default function Fetures(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
-      padding="0px 0px 0px 0px"
-      {...rest}
+      padding="10px 0px 0px 0px"
       {...getOverrideProps(overrides, "Fetures")}
+      {...rest}
     >
       <Flex
         gap="10px"
@@ -35,6 +35,28 @@ export default function Fetures(props) {
         padding="10px 0px 10px 0px"
         {...getOverrideProps(overrides, "Frame 210")}
       >
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="700"
+          color="rgba(13,26,38,1)"
+          lineHeight="24px"
+          textAlign="center"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children="Features"
+          {...getOverrideProps(overrides, "Features")}
+        ></Text>
         <Text
           fontFamily="Inter"
           fontSize="20px"

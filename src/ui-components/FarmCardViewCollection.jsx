@@ -6,8 +6,8 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { SortDirection } from "@aws-amplify/datastore";
 import { Farm } from "../models";
+import { SortDirection } from "@aws-amplify/datastore";
 import {
   getOverrideProps,
   useDataStoreBinding,
@@ -17,20 +17,27 @@ import { Collection } from "@aws-amplify/ui-react";
 export default function FarmCardViewCollection(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const itemsPagination = { sort: (s) => s.updatedAt(SortDirection.ASCENDING) };
+  const [items, setItems] = React.useState(undefined);
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Farm,
     pagination: itemsPagination,
   }).items;
-  const items = itemsProp !== undefined ? itemsProp : itemsDataStore;
+  React.useEffect(() => {
+    if (itemsProp !== undefined) {
+      setItems(itemsProp);
+      return;
+    }
+    setItems(itemsDataStore);
+  }, [itemsProp, itemsDataStore]);
   return (
     <Collection
       type="list"
       direction="column"
       justifyContent="left"
       items={items || []}
-      {...rest}
       {...getOverrideProps(overrides, "FarmCardViewCollection")}
+      {...rest}
     >
       {(item, index) => (
         <FarmCardView

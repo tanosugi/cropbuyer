@@ -6,10 +6,10 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { fetchByPath, validateField } from "./utils";
-import { Grower } from "../models";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { Grower } from "../models";
+import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 export default function NewForm1(props) {
   const {
@@ -24,13 +24,13 @@ export default function NewForm1(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: undefined,
-    email: undefined,
-    phone: undefined,
-    address: undefined,
-    image_url: undefined,
-    description: undefined,
-    s3Key: undefined,
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    image_url: "",
+    description: "",
+    s3Key: "",
   };
   const [name, setName] = React.useState(initialValues.name);
   const [email, setEmail] = React.useState(initialValues.email);
@@ -61,7 +61,15 @@ export default function NewForm1(props) {
     description: [],
     s3Key: [],
   };
-  const runValidationTasks = async (fieldName, value) => {
+  const runValidationTasks = async (
+    fieldName,
+    currentValue,
+    getDisplayValue
+  ) => {
+    const value =
+      currentValue && getDisplayValue
+        ? getDisplayValue(currentValue)
+        : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -110,6 +118,11 @@ export default function NewForm1(props) {
           modelFields = onSubmit(modelFields);
         }
         try {
+          Object.entries(modelFields).forEach(([key, value]) => {
+            if (typeof value === "string" && value.trim() === "") {
+              modelFields[key] = undefined;
+            }
+          });
           await DataStore.save(new Grower(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
@@ -123,13 +136,14 @@ export default function NewForm1(props) {
           }
         }
       }}
-      {...rest}
       {...getOverrideProps(overrides, "NewForm1")}
+      {...rest}
     >
       <TextField
         label="Name"
         isRequired={false}
         isReadOnly={false}
+        value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -159,6 +173,7 @@ export default function NewForm1(props) {
         label="Email"
         isRequired={false}
         isReadOnly={false}
+        value={email}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -188,6 +203,7 @@ export default function NewForm1(props) {
         label="Phone"
         isRequired={false}
         isReadOnly={false}
+        value={phone}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -217,6 +233,7 @@ export default function NewForm1(props) {
         label="Address"
         isRequired={false}
         isReadOnly={false}
+        value={address}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -246,6 +263,7 @@ export default function NewForm1(props) {
         label="Image url"
         isRequired={false}
         isReadOnly={false}
+        value={image_url}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -275,6 +293,7 @@ export default function NewForm1(props) {
         label="Description"
         isRequired={false}
         isReadOnly={false}
+        value={description}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -304,6 +323,7 @@ export default function NewForm1(props) {
         label="S3 key"
         isRequired={false}
         isReadOnly={false}
+        value={s3Key}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -336,10 +356,16 @@ export default function NewForm1(props) {
         <Button
           children="Clear"
           type="reset"
-          onClick={resetStateValues}
+          onClick={(event) => {
+            event.preventDefault();
+            resetStateValues();
+          }}
           {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
-        <Flex {...getOverrideProps(overrides, "RightAlignCTASubFlex")}>
+        <Flex
+          gap="15px"
+          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
+        >
           <Button
             children="Cancel"
             type="button"

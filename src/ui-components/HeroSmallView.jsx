@@ -20,8 +20,8 @@ export default function HeroSmallView(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "HeroSmallView")}
+      {...rest}
     >
       <Flex
         gap="24px"

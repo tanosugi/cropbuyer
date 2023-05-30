@@ -26,8 +26,8 @@ export default function NavbarView(props) {
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(214,245,219,1)"
       margin="0"
-      {...rest}
       {...getOverrideProps(overrides, "NavbarView")}
+      {...rest}
     >
       <Flex
         gap="0"

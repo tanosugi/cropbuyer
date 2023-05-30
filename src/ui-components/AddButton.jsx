@@ -20,8 +20,8 @@ export default function AddButton(props) {
       alignItems="center"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "AddButton")}
+      {...rest}
     >
       <View
         width="24px"

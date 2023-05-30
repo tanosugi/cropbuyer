@@ -6,8 +6,17 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FlexProps } from "@aws-amplify/ui-react";
+import { FlexProps, SliderFieldProps, SwitchFieldProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type MapControlViewOverridesProps = {
+    MapControlView?: PrimitiveOverrideProps<FlexProps>;
+    FarmInfoSwitchView?: PrimitiveOverrideProps<FlexProps>;
+    SwitchField35313346?: PrimitiveOverrideProps<SwitchFieldProps>;
+    SwitchField35313347?: PrimitiveOverrideProps<SwitchFieldProps>;
+    SwitchField35313348?: PrimitiveOverrideProps<SwitchFieldProps>;
+    SliderField?: PrimitiveOverrideProps<SliderFieldProps>;
+} & EscapeHatchProps;
 export declare type MapControlViewProps = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: MapControlViewOverridesProps | undefined | null;
 }>;
 export default function MapControlView(props: MapControlViewProps): React.ReactElement;

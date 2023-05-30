@@ -6,13 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Grower } from "../models";
 import {
   getOverrideProps,
   useDataStoreCreateAction,
   useDataStoreUpdateAction,
   useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
-import { Grower } from "../models";
 import { schema } from "../models/schema";
 import { useEffect } from "react";
 import {
@@ -51,6 +51,7 @@ export default function EditGrowerView(props) {
   ] = useStateMutationAction("");
   const buttonThreeFourSixEightTwoSevenThreeFourOnClick =
     useDataStoreCreateAction({
+      model: Grower,
       fields: {
         name: textFieldThreeFourFourEightTwoSevenFourZeroValue,
         email: textFieldThreeFourFourEightTwoSevenFourOneValue,
@@ -59,11 +60,12 @@ export default function EditGrowerView(props) {
         description: textAreaFieldValue,
         image_url: textFieldThreeFourEightNineThreeOneOneZeroValue,
       },
-      model: Grower,
       schema: schema,
     });
   const buttonThreeFourSixEightTwoSevenThreeEightOnClick =
     useDataStoreUpdateAction({
+      model: Grower,
+      id: grower?.id,
       fields: {
         name: textFieldThreeFourFourEightTwoSevenFourZeroValue,
         email: textFieldThreeFourFourEightTwoSevenFourOneValue,
@@ -72,8 +74,6 @@ export default function EditGrowerView(props) {
         description: textAreaFieldValue,
         image_url: textFieldThreeFourEightNineThreeOneOneZeroValue,
       },
-      id: grower?.id,
-      model: Grower,
       schema: schema,
     });
   useEffect(() => {
@@ -135,8 +135,8 @@ export default function EditGrowerView(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...rest}
       {...getOverrideProps(overrides, "EditGrowerView")}
+      {...rest}
     >
       <Flex
         gap="24px"

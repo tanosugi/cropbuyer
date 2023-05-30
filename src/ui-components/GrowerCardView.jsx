@@ -6,12 +6,12 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Grower } from "../models";
 import {
   getOverrideProps,
   useDataStoreDeleteAction,
   useNavigateAction,
 } from "@aws-amplify/ui-react/internal";
-import { Grower } from "../models";
 import { schema } from "../models/schema";
 import { Flex, Icon, Image, Text, View } from "@aws-amplify/ui-react";
 export default function GrowerCardView(props) {
@@ -25,8 +25,8 @@ export default function GrowerCardView(props) {
     url: `${"tel:"}${grower?.phone}`,
   });
   const frameEightOnClick = useDataStoreDeleteAction({
-    id: grower?.id,
     model: Grower,
+    id: grower?.id,
     schema: schema,
   });
   return (
@@ -41,8 +41,8 @@ export default function GrowerCardView(props) {
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       padding="5px 5px 5px 5px"
       backgroundColor="rgba(250,250,250,1)"
-      {...rest}
       {...getOverrideProps(overrides, "GrowerCardView")}
+      {...rest}
     >
       <Image
         width="unset"

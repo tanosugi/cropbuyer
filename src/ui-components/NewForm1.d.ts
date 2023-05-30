@@ -5,8 +5,8 @@
  **************************************************************************/
 
 import * as React from "react";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -30,16 +30,16 @@ export declare type NewForm1ValidationValues = {
     description?: ValidationFunction<string>;
     s3Key?: ValidationFunction<string>;
 };
-export declare type FormProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type NewForm1OverridesProps = {
-    NewForm1Grid?: FormProps<GridProps>;
-    name?: FormProps<TextFieldProps>;
-    email?: FormProps<TextFieldProps>;
-    phone?: FormProps<TextFieldProps>;
-    address?: FormProps<TextFieldProps>;
-    image_url?: FormProps<TextFieldProps>;
-    description?: FormProps<TextFieldProps>;
-    s3Key?: FormProps<TextFieldProps>;
+    NewForm1Grid?: PrimitiveOverrideProps<GridProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
+    email?: PrimitiveOverrideProps<TextFieldProps>;
+    phone?: PrimitiveOverrideProps<TextFieldProps>;
+    address?: PrimitiveOverrideProps<TextFieldProps>;
+    image_url?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextFieldProps>;
+    s3Key?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NewForm1Props = React.PropsWithChildren<{
     overrides?: NewForm1OverridesProps | undefined | null;
@@ -51,5 +51,5 @@ export declare type NewForm1Props = React.PropsWithChildren<{
     onCancel?: () => void;
     onChange?: (fields: NewForm1InputValues) => NewForm1InputValues;
     onValidate?: NewForm1ValidationValues;
-}>;
+} & React.CSSProperties>;
 export default function NewForm1(props: NewForm1Props): React.ReactElement;

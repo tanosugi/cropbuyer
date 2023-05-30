@@ -20,8 +20,8 @@ export default function FarmDetailView(props) {
       alignItems="center"
       position="relative"
       padding="5px 5px 5px 5px"
-      {...rest}
       {...getOverrideProps(overrides, "FarmDetailView")}
+      {...rest}
     >
       <Flex
         gap="10px"

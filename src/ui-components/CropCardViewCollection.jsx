@@ -6,8 +6,8 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { SortDirection } from "@aws-amplify/datastore";
 import { Crop } from "../models";
+import { SortDirection } from "@aws-amplify/datastore";
 import {
   getOverrideProps,
   useDataStoreBinding,
@@ -19,12 +19,19 @@ export default function CropCardViewCollection(props) {
   const itemsPagination = {
     sort: (s) => s.updatedAt(SortDirection.DESCENDING),
   };
+  const [items, setItems] = React.useState(undefined);
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Crop,
     pagination: itemsPagination,
   }).items;
-  const items = itemsProp !== undefined ? itemsProp : itemsDataStore;
+  React.useEffect(() => {
+    if (itemsProp !== undefined) {
+      setItems(itemsProp);
+      return;
+    }
+    setItems(itemsDataStore);
+  }, [itemsProp, itemsDataStore]);
   return (
     <Collection
       type="list"
@@ -33,8 +40,8 @@ export default function CropCardViewCollection(props) {
       direction="column"
       justifyContent="center"
       items={items || []}
-      {...rest}
       {...getOverrideProps(overrides, "CropCardViewCollection")}
+      {...rest}
     >
       {(item, index) => (
         <CropCardView

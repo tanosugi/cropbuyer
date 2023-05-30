@@ -7,10 +7,20 @@
 import * as React from "react";
 import { Farm } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FlexProps } from "@aws-amplify/ui-react";
+import { FlexProps, RatingProps, TextProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type FarmInfoWindowViewOverridesProps = {
+    FarmInfoWindowView?: PrimitiveOverrideProps<FlexProps>;
+    "Farm Name"?: PrimitiveOverrideProps<TextProps>;
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 29"?: PrimitiveOverrideProps<FlexProps>;
+    "Area : 350 hectare"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 24"?: PrimitiveOverrideProps<FlexProps>;
+    Rating?: PrimitiveOverrideProps<RatingProps>;
+} & EscapeHatchProps;
 export declare type FarmInfoWindowViewProps = React.PropsWithChildren<Partial<FlexProps> & {
     farm?: Farm;
 } & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: FarmInfoWindowViewOverridesProps | undefined | null;
 }>;
 export default function FarmInfoWindowView(props: FarmInfoWindowViewProps): React.ReactElement;

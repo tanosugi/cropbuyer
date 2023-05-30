@@ -6,13 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Farm } from "../models";
 import {
   getOverrideProps,
   useDataStoreCreateAction,
   useDataStoreUpdateAction,
   useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
-import { Farm } from "../models";
 import { schema } from "../models/schema";
 import { useEffect } from "react";
 import {
@@ -51,6 +51,7 @@ export default function EditFarmView(props) {
     useStateMutationAction("");
   const buttonThreeFiveFourSixThreeThreeFiveThreeOnClick =
     useDataStoreCreateAction({
+      model: Farm,
       fields: {
         name: textFieldThreeFiveFourSixThreeThreeFourFiveValue,
         growerName: textFieldThreeFiveFourSixThreeThreeFourSixValue,
@@ -59,11 +60,12 @@ export default function EditFarmView(props) {
         polygonString: textFieldThreeFiveFourSixThreeThreeFourNineValue,
         description: textAreaFieldValue,
       },
-      model: Farm,
       schema: schema,
     });
   const buttonThreeFiveFourSixThreeThreeFiveFourOnClick =
     useDataStoreUpdateAction({
+      model: Farm,
+      id: farm?.id,
       fields: {
         name: textFieldThreeFiveFourSixThreeThreeFourFiveValue,
         growerName: textFieldThreeFiveFourSixThreeThreeFourSixValue,
@@ -72,8 +74,6 @@ export default function EditFarmView(props) {
         polygonString: textFieldThreeFiveFourSixThreeThreeFourNineValue,
         description: textAreaFieldValue,
       },
-      id: farm?.id,
-      model: Farm,
       schema: schema,
     });
   useEffect(() => {
@@ -135,8 +135,8 @@ export default function EditFarmView(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...rest}
       {...getOverrideProps(overrides, "EditFarmView")}
+      {...rest}
     >
       <Flex
         gap="24px"

@@ -6,13 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Crop } from "../models";
 import {
   getOverrideProps,
   useDataStoreCreateAction,
   useDataStoreUpdateAction,
   useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
-import { Crop } from "../models";
 import { schema } from "../models/schema";
 import { useEffect } from "react";
 import {
@@ -43,25 +43,25 @@ export default function EditCropView(props) {
   ] = useStateMutationAction("");
   const buttonThreeFourSevenZeroFourFiveFourFiveOnClick =
     useDataStoreCreateAction({
+      model: Crop,
       fields: {
         name: textFieldThreeFourSevenZeroFourFiveThreeEightValue,
         image_url: textFieldThreeFourSevenZeroFourFiveThreeNineValue,
         description: textAreaFieldValue,
         polygonColor: textFieldThreeFiveFourZeroThreeOneSixSevenValue,
       },
-      model: Crop,
       schema: schema,
     });
   const buttonThreeFourSevenZeroFourFiveFourSixOnClick =
     useDataStoreUpdateAction({
+      model: Crop,
+      id: crop?.id,
       fields: {
         name: textFieldThreeFourSevenZeroFourFiveThreeEightValue,
         image_url: textFieldThreeFourSevenZeroFourFiveThreeNineValue,
         description: textAreaFieldValue,
         polygonColor: textFieldThreeFiveFourZeroThreeOneSixSevenValue,
       },
-      id: crop?.id,
-      model: Crop,
       schema: schema,
     });
   useEffect(() => {
@@ -107,8 +107,8 @@ export default function EditCropView(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...rest}
       {...getOverrideProps(overrides, "EditCropView")}
+      {...rest}
     >
       <Flex
         gap="24px"

@@ -6,18 +6,18 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Farm } from "../models";
 import {
   getOverrideProps,
   useDataStoreDeleteAction,
 } from "@aws-amplify/ui-react/internal";
-import { Farm } from "../models";
 import { schema } from "../models/schema";
 import { Flex, Icon, Rating, Text, View } from "@aws-amplify/ui-react";
 export default function FarmCardView(props) {
   const { farm, rectangle1, overrides, ...rest } = props;
   const frameEightOnClick = useDataStoreDeleteAction({
-    id: farm?.id,
     model: Farm,
+    id: farm?.id,
     schema: schema,
   });
   return (
@@ -32,8 +32,8 @@ export default function FarmCardView(props) {
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       padding="5px 5px 5px 5px"
       backgroundColor="rgba(250,250,250,1)"
-      {...rest}
       {...getOverrideProps(overrides, "FarmCardView")}
+      {...rest}
     >
       <View
         width="112px"

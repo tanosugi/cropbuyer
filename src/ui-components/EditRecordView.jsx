@@ -6,13 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
+import { Record } from "../models";
 import {
   getOverrideProps,
   useDataStoreCreateAction,
   useDataStoreUpdateAction,
   useStateMutationAction,
 } from "@aws-amplify/ui-react/internal";
-import { Record } from "../models";
 import { schema } from "../models/schema";
 import { useEffect } from "react";
 import {
@@ -59,6 +59,7 @@ export default function EditRecordView(props) {
     useStateMutationAction("");
   const buttonThreeFourSevenZeroFourSixZeroZeroOnClick =
     useDataStoreCreateAction({
+      model: Record,
       fields: {
         year: textFieldThreeFourSevenZeroFourFiveNineThreeValue,
         cropName: textFieldThreeFourNineThreeThreeOneFourEightValue,
@@ -69,11 +70,12 @@ export default function EditRecordView(props) {
         image_url: textFieldThreeFourEightNineThreeOneTwoFourValue,
         memo: textAreaFieldValue,
       },
-      model: Record,
       schema: schema,
     });
   const buttonThreeFourSevenZeroFourSixZeroOneOnClick =
     useDataStoreUpdateAction({
+      model: Record,
+      id: record?.id,
       fields: {
         year: textFieldThreeFourSevenZeroFourFiveNineThreeValue,
         cropName: textFieldThreeFourNineThreeThreeOneFourEightValue,
@@ -84,8 +86,6 @@ export default function EditRecordView(props) {
         image_url: textFieldThreeFourEightNineThreeOneTwoFourValue,
         memo: textAreaFieldValue,
       },
-      id: record?.id,
-      model: Record,
       schema: schema,
     });
   useEffect(() => {
@@ -163,8 +163,8 @@ export default function EditRecordView(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...rest}
       {...getOverrideProps(overrides, "EditRecordView")}
+      {...rest}
     >
       <Flex
         gap="24px"

@@ -8,6 +8,11 @@ import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { CropCardViewProps } from "./CropCardView";
 import { CollectionProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type CropCardViewCollectionOverridesProps = {
+    CropCardViewCollection?: PrimitiveOverrideProps<CollectionProps>;
+    CropCardView?: CropCardViewProps;
+} & EscapeHatchProps;
 export declare type CropCardViewCollectionProps = React.PropsWithChildren<Partial<CollectionProps<any>> & {
     items?: any[];
     overrideItems?: (collectionItem: {
@@ -15,6 +20,6 @@ export declare type CropCardViewCollectionProps = React.PropsWithChildren<Partia
         index: number;
     }) => CropCardViewProps;
 } & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: CropCardViewCollectionOverridesProps | undefined | null;
 }>;
 export default function CropCardViewCollection(props: CropCardViewCollectionProps): React.ReactElement;

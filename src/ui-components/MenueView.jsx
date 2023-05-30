@@ -25,8 +25,8 @@ export default function MenueView(props) {
       position="relative"
       padding="10px 10px 10px 10px"
       backgroundColor="rgba(250,250,250,1)"
-      {...rest}
       {...getOverrideProps(overrides, "MenueView")}
+      {...rest}
     >
       <Flex
         gap="10px"

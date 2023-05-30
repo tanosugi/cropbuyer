@@ -20,8 +20,8 @@ export default function FarmInfoWindowView(props) {
       alignItems="flex-start"
       position="relative"
       padding="5px 0px 5px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "FarmInfoWindowView")}
+      {...rest}
     >
       <Text
         fontFamily="Inter"
